@@ -1,0 +1,19 @@
+.navbar-transparent {
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-solid {
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: background-color 0.3s ease;
+}
+
+.navbar-brand,
+.nav-link {
+  color: #fff !important;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #fbbf24 !important;
+}

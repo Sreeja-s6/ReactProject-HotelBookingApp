@@ -1,0 +1,54 @@
+.newsletter-section {
+  background-color: #fff; /* outer dark section */
+}
+
+.newsletter-box {
+  background-color: #1a1f35; /* inner card color */
+  color: #fff;
+  width: 70%;
+  max-width: 800px;
+}
+
+.newsletter-box h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.newsletter-box p {
+  color: rgba(255, 255, 255, 0.85) !important; /* make subtitle visible */
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.newsletter-input {
+  background-color: #0b132b;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1rem;
+}
+
+.newsletter-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.newsletter-btn img {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.newsletter-btn:hover img {
+  transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+  .newsletter-box {
+    width: 90%;
+    padding: 2.5rem 1.5rem;
+  }
+}
+
+.newsletter-box .last {
+    font-size: 13px;
+}

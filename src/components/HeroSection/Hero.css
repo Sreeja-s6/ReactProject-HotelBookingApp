@@ -1,0 +1,73 @@
+.custom-pill {
+  background-color: rgba(73, 185, 255, 0.5);
+  padding: 0.25rem 0.875rem; 
+  border-radius: 9999px;
+  margin-top: 5rem;
+  color: white;
+}
+
+.hero-heading {
+  font-family: 'Playfair', serif;
+  font-weight: 900;
+  font-size: 2rem;
+  max-width: 36rem;
+  margin-top: 1rem;
+  color: #fff;
+}
+
+.font-playfair {
+  font-family: 'Playfair', serif !important;
+}
+
+@media (min-width: 768px) {
+  .hero-heading {
+    font-size: 56px;
+    line-height: 56px;
+    font-weight: 800;
+  }
+}
+
+.hero-paragraph {
+  max-width: 500px;
+  margin-top: 0.5rem; 
+  font-size: 0.875rem; 
+}
+
+@media (min-width: 768px) {
+  .hero-paragraph {
+    font-size: 1rem; 
+  }
+}
+
+/* Align icon and label text perfectly */
+.label-row {
+  display: flex;
+  align-items: center; /* vertically centers icons and text */
+  gap: 6px; /* space between icon and label */
+  margin-bottom: 6px;
+}
+
+.label-row svg {
+  font-size: 16px; /* consistent icon size */
+  color: #333;
+}
+
+.label-row img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  margin-top: -1px; /* tiny adjustment for perfect vertical alignment */
+}
+
+.label-row label {
+  margin-bottom: 0; /* remove default bootstrap label spacing */
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+@media (min-width: 768px) {
+  .label-row button {
+    margin-left: 20px;
+  }
+}
+

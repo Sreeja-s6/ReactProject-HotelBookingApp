@@ -1,0 +1,76 @@
+.footer {
+  background-color: #f8fafc; /* very light blue-gray like Figma */
+  color: #333;
+}
+
+/* --- Logo --- */
+.footer-logo {
+  width: 150px;
+  display: block;
+  filter: brightness(0) saturate(100%); /* makes white logo black */
+}
+
+/* --- Description text under logo --- */
+.footer-desc {
+  max-width: 300px;
+  line-height: 1.6;
+}
+
+/* --- Social Icons --- */
+.footer-icon {
+  color: #6c757d;
+  font-size: 1.1rem;
+  transition: color 0.2s ease;
+}
+.footer-icon:hover {
+  color: #111;
+}
+
+/* --- Links --- */
+.footer-links li {
+  margin-bottom: 0.45rem;
+}
+.footer-links li a {
+  color: #6c757d;
+  text-decoration: none;
+}
+.footer-links li a:hover {
+  color: #111;
+}
+
+/* --- Input + Arrow Button --- */
+.footer-form {
+  gap: 0.4rem;
+}
+.footer-input {
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  flex: 1;
+}
+
+.footer-arrow-btn {
+  padding: 0;         /* remove extra space inside the button */
+  margin-left: 0;     /* ensure it touches the search box */
+  border: none;       /* optional if border appears */
+  height: 100%;       /* matches input height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Bottom --- */
+hr {
+  border-color: rgba(0, 0, 0, 0.07);
+}
+
+.footer small,
+.footer a,
+.footer p {
+  font-size: 0.95rem;
+}
+
+.footer .footer-arrow-icon {
+    filter: brightness(0) invert(1);
+}

@@ -57,3 +57,15 @@
   border-radius: 9999px;    /* rounded-full */
   display: inline-block;
 }
+
+.responsive-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.875rem; /* text-3xl */
+}
+
+@media (min-width: 768px) {
+  .responsive-heading {
+    font-size: 2.25rem; /* text-4xl */
+  }
+}
+

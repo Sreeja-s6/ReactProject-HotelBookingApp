@@ -1,0 +1,136 @@
+/* Section Layout */
+.allrooms-section {
+  padding-top: 7rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+  .allrooms-section {
+    padding-top: 8.75rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .allrooms-section {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .allrooms-section {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+}
+
+/* Fonts */
+.font-playfair {
+  font-family: "Playfair Display", serif;
+}
+
+/* Heading */
+.custom-heading {
+  font-size: 2.25rem;
+}
+@media (min-width: 768px) {
+  .custom-heading {
+    font-size: 40px;
+  }
+}
+
+/* Paragraph */
+.custom-paragraph {
+  font-size: 0.875rem;
+  color: rgba(107, 114, 128, 0.9);
+  margin-top: 0.5rem;
+  max-width: 43.5rem;
+}
+@media (min-width: 768px) {
+  .custom-paragraph {
+    font-size: 1rem;
+  }
+}
+
+.text-gray-500 {
+  color: #6B7280;
+}
+
+/* Grid Layout */
+.rooms-grid {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+/* Room Card */
+.room-card {
+  width: 20rem; /* fixed card width like video */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Image Container */
+.room-image-container {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.room-image {
+  width: 100%;
+  height: 13rem;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.room-image-container:hover .room-image {
+  transform: scale(1.05);
+}
+
+
+/* Room Details */
+.room-title {
+  font-size: 1.25rem;
+  color: #1F2937;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.room-title:hover {
+  color: #007bff;
+}
+
+.rating-row {
+  display: flex;
+  align-items: center;      /* vertical alignment */
+  gap: 0.4rem;              /* small space between stars and text */
+}
+
+.rating-row span {
+  font-size: 0.95rem;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;      /* keeps text vertically aligned */
+}
+
+/* Fix vertical alignment for the stars themselves */
+.rating-row svg,
+.rating-row i,
+.rating-row img {
+  vertical-align: middle;
+  margin-bottom: 2px;       /* adjust this if text still looks low or high */
+}
+
+/* optional small tweak if needed */
+.rating-row span {
+  transform: translateY(-1px);
+}
+

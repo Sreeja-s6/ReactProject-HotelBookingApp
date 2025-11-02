@@ -1,7 +1,7 @@
 import React from 'react'
 import Title from './Title'
+import StarRating from './StarRating'
 import { Row, Col, Card } from "react-bootstrap";
-import { FaStar } from "react-icons/fa";
 import { testimonials } from '../assets/assets';
 
 function Testimonial() {
@@ -12,7 +12,6 @@ function Testimonial() {
         subTitle='Discover why discerning travelers consistently choose QuickStay for their exclusive and luxurious accomodations around the world.'
       />
 
-      {/* Testimonials Cards */}
       <Row className="g-4 mt-4 w-100 justify-content-center">
         {testimonials.map((item) => (
           <Col key={item.id} xs={12} md={6} lg={4}>
@@ -28,14 +27,9 @@ function Testimonial() {
                 <Card.Title className="fw-semibold mt-2 mb-0">{item.name}</Card.Title>
                 <Card.Text className="text-muted small">{item.address}</Card.Text>
 
-                {/* Rating stars */}
-                <div className="d-flex justify-content-center mb-3">
-                  {[...Array(item.rating)].map((_, index) => (
-                    <FaStar key={index} className="text-warning me-1" />
-                  ))}
-                </div>
+                {/* ⭐ Reusable StarRating component */}
+                <StarRating rating={item.rating} />
 
-                {/* Review text */}
                 <Card.Text className="text-muted" style={{ fontSize: "0.9rem" }}>
                   “{item.review}”
                 </Card.Text>

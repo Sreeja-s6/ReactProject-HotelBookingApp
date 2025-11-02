@@ -2,6 +2,8 @@ import React from 'react'
 import Navbar1 from './components/Navbar/Navbar1'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
+import Footer from './components/Footer/Footer'
+import AllRooms from './pages/AllRooms/AllRooms'
 
 function App() {
   return (
@@ -10,8 +12,10 @@ function App() {
       <div style={{ minHeight: '70vh' }}>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/rooms' element={<AllRooms />} /> 
         </Routes>
       </div>
+      <Footer />
     </div>
   )
 }

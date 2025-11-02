@@ -79,7 +79,7 @@ function Footer() {
 
                 {/* Bottom Section */}
                 <div className="d-flex flex-column flex-md-row justify-content-between text-muted small">
-                    <p className="mb-0">© 2025 QuickStay. All rights reserved.</p>
+                    <p className="mb-0">© {new Date().getFullYear()} QuickStay. All rights reserved.</p>
                     <div className="d-flex gap-3">
                         <a href="#" className="text-muted text-decoration-none">Privacy</a>
                         <a href="#" className="text-muted text-decoration-none">Terms</a>

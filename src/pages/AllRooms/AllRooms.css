@@ -196,3 +196,13 @@
   }
 }
 
+@media (min-width: 992px) {
+  .filter-section {
+    position: relative;
+    top: 0;
+  }
+}
+
+.mt-150 {
+  margin-top: 150px !important;
+}

@@ -4,53 +4,47 @@ import { assets, facilityIcons, roomsDummyData } from '../../assets/assets';
 import { useNavigate } from 'react-router-dom';
 import StarRating from '../../components/StarRating';
 
-const checkBox = ({ label, selected = false, onChange = () => {} }) => {
+const CheckBox = ({ label, selected = false, onChange = () => {} }) => {
   return (
     <label className="d-flex align-items-center gap-3 mt-2 small" style={{ cursor: 'pointer' }}>
-      <input type="checkbox" />
+      <input type="checkbox" checked={selected} onChange={(e) => onChange(e.target.checked, label)} />
+      <span className="fw-light" style={{ userSelect: 'none' }}>{label}</span>
     </label>
-  )
-}
+  );
+};
+
+const RadioButton = ({ label, selected = false, onChange = () => {} }) => {
+  return (
+    <label className="d-flex align-items-center gap-3 mt-2 small" style={{ cursor: 'pointer' }}>
+      <input type="radio" name="sortOption" checked={selected} onChange={(e) => onChange(e.target.checked, label)} />
+      <span className="fw-light" style={{ userSelect: 'none' }}>{label}</span>
+    </label>
+  );
+};
 
 function AllRooms() {
   const navigate = useNavigate();
   const [openFilters, setOpenFilters] = useState(false);
 
-  const roomTypes = [
-    "Single Bed",
-    "Double Bed",
-    "Luxury Room",
-    "Family Suite",
-  ];
-
-  const priceRanges = [
-    '0 to 500',
-    '500 to 1000',
-    '1000 to 2000',
-    '2000 to 3000',
-  ];
-
-  const sortOptions = [
-    "Price Low to High",
-    "price High to Low",
-    "Newest First",
-  ]
+  const roomTypes = ['Single Bed', 'Double Bed', 'Luxury Room', 'Family Suite'];
+  const priceRanges = ['0 to 500', '500 to 1000', '1000 to 2000', '2000 to 3000'];
+  const sortOptions = ['Price Low to High', 'Price High to Low', 'Newest First'];
 
   return (
-    <div className="allrooms-section">
-      {/* Heading */}
-      <div className="text-start mb-5 ps-md-5">
-        <h1 className="font-playfair custom-heading">Hotel Rooms</h1>
-        <p className="custom-paragraph">
-          Take advantage of our limited-time offers and special packages to enhance your stay
-          and create unforgettable memories.
-        </p>
-      </div>
+    <div className="d-flex flex-column-reverse flex-lg-row align-items-start justify-content-between custom-section">
 
-      {/* Main Layout: Rooms (left) + Filters (right) */}
-      <div className="d-flex flex-column flex-lg-row justify-content-between gap-5 ps-md-5 pe-md-5">
+      {/* LEFT SIDE: Rooms Section */}
+      <div className="allrooms-section flex-grow-1">
+        {/* Heading */}
+        <div className="text-start mb-5 ps-md-5">
+          <h1 className="font-playfair custom-heading">Hotel Rooms</h1>
+          <p className="custom-paragraph">
+            Take advantage of our limited-time offers and special packages to enhance your stay
+            and create unforgettable memories.
+          </p>
+        </div>
 
-        {/* LEFT: Rooms List */}
+        {/* Rooms List */}
         <div className="rooms-list ps-md-5 flex-grow-1">
           {roomsDummyData.map((room) => (
             <div
@@ -100,7 +94,7 @@ function AllRooms() {
                   <span>{room.hotel.address}</span>
                 </div>
 
-                {/* Room Amenities */}
+                {/* Amenities */}
                 <div className="d-flex flex-wrap align-items-center mt-3 mb-4 gap-4">
                   {room.amenities.map((item, index) => (
                     <div
@@ -118,7 +112,7 @@ function AllRooms() {
                   ))}
                 </div>
 
-                {/* Room price per night */}
+                {/* Price */}
                 <p className="fs-6 fw-medium" style={{ color: '#374151' }}>
                   ${room.pricePerNight} /night
                 </p>
@@ -126,25 +120,42 @@ function AllRooms() {
             </div>
           ))}
         </div>
+      </div>
 
-        {/* RIGHT: Filter Section */}
-        <div className="filter-section bg-white border text-secondary">
+      {/* RIGHT SIDE: Filters */}
+      <div className="filter-section bg-white border text-secondary me-lg-5 mt-150">
+        <div className={`d-flex align-items-center justify-content-between px-4 py-3 ${openFilters ? 'border-bottom' : ''} custom-border`} style={{ backgroundColor: '#fff' }}>
+  <h6 className="mb-0 fw-semibold text-dark" style={{ letterSpacing: '0.5px' }}>FILTERS</h6>
+  <div className="fw-semibold text-secondary" style={{ fontSize: '0.85rem', cursor: 'pointer' }}>
+    <span onClick={() => setOpenFilters(!openFilters)} className="d-lg-none">
+      {openFilters ? 'HIDE' : 'SHOW'}
+    </span>
+    <span className="d-none d-lg-block fw-semibold text-dark">CLEAR</span>
+  </div>
+</div>
 
-          <div  className={`d-flex align-items-center justify-content-between px-4 py-2 ${openFilters ? "border-bottom" : ""} custom-border`}>
-            <p style={{ fontSize: '1rem', fontWeight: 500, color: '#1F2937' }}>FILTERS</p>
-            <div style={{ fontSize: '0.75rem', cursor: 'pointer' }}>
-              <span onClick={() => setOpenFilters(!openFilters)} className="d-lg-none">
-                {openFilters ? 'HIDE' : 'SHOW'}</span>
-              <span className='d-none d-lg-block'>CLEAR</span>
-            </div>
+
+        <div className={`transition-height overflow-hidden ${openFilters ? 'auto-height' : 'collapsed-height'}`}>
+          <div className="px-5 pt-5">
+            <p style={{ fontWeight: 500, color: '#1F2937', paddingBottom: '0.5rem' }}>Popular Filters</p>
+            {roomTypes.map((room, index) => (
+              <CheckBox key={index} label={room} />
+            ))}
           </div>
 
-          <div   className={`transition-height overflow-hidden ${openFilters ? "auto-height" : "collapsed-height"}`}>
-            <div className="px-5 pt-5">
-              <p style={{ fontWeight: 500, color: '#1F2937', paddingBottom: '0.5rem' }}>Popular Filters</p>
-            </div>
+          <div className="px-5 pt-5">
+            <p style={{ fontWeight: 500, color: '#1F2937', paddingBottom: '0.5rem' }}>Price Range</p>
+            {priceRanges.map((range, index) => (
+              <CheckBox key={index} label={`$ ${range}`} />
+            ))}
           </div>
-          
+
+          <div className="px-5 pt-5 mb-5">
+            <p style={{ fontWeight: 500, color: '#1F2937', paddingBottom: '0.5rem' }}>Sort By</p>
+            {sortOptions.map((option, index) => (
+              <RadioButton key={index} label={option} />
+            ))}
+          </div>
         </div>
       </div>
     </div>

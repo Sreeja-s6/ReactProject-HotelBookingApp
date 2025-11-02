@@ -1,70 +1,154 @@
-import React from 'react'
-import './AllRooms.css'
-import { assets, roomsDummyData } from '../../assets/assets'
-import { useNavigate } from 'react-router-dom'
-import StarRating from '../../components/StarRating'
+import React, { useState } from 'react';
+import './AllRooms.css';
+import { assets, facilityIcons, roomsDummyData } from '../../assets/assets';
+import { useNavigate } from 'react-router-dom';
+import StarRating from '../../components/StarRating';
+
+const checkBox = ({ label, selected = false, onChange = () => {} }) => {
+  return (
+    <label className="d-flex align-items-center gap-3 mt-2 small" style={{ cursor: 'pointer' }}>
+      <input type="checkbox" />
+    </label>
+  )
+}
 
 function AllRooms() {
   const navigate = useNavigate();
+  const [openFilters, setOpenFilters] = useState(false);
+
+  const roomTypes = [
+    "Single Bed",
+    "Double Bed",
+    "Luxury Room",
+    "Family Suite",
+  ];
+
+  const priceRanges = [
+    '0 to 500',
+    '500 to 1000',
+    '1000 to 2000',
+    '2000 to 3000',
+  ];
+
+  const sortOptions = [
+    "Price Low to High",
+    "price High to Low",
+    "Newest First",
+  ]
 
   return (
     <div className="allrooms-section">
       {/* Heading */}
-      <div className="text-start mb-5">
+      <div className="text-start mb-5 ps-md-5">
         <h1 className="font-playfair custom-heading">Hotel Rooms</h1>
         <p className="custom-paragraph">
-          Take advantage of our limited-time offers and special packages to enhance your stay and create unforgettable memories.
+          Take advantage of our limited-time offers and special packages to enhance your stay
+          and create unforgettable memories.
         </p>
       </div>
 
-      {/* Rooms Grid */}
-      <div className="rooms-grid">
-        {roomsDummyData.map((room) => (
-          <div key={room._id} className="room-card">
+      {/* Main Layout: Rooms (left) + Filters (right) */}
+      <div className="d-flex flex-column flex-lg-row justify-content-between gap-5 ps-md-5 pe-md-5">
+
+        {/* LEFT: Rooms List */}
+        <div className="rooms-list ps-md-5 flex-grow-1">
+          {roomsDummyData.map((room) => (
             <div
-              className="room-image-container"
-              onClick={() => {
-                navigate(`/rooms/${room._id}`);
-                scrollTo(0, 0);
-              }}
+              key={room._id}
+              className="room-item border-bottom pb-5 mb-5 d-flex flex-column flex-md-row align-items-start gap-4 w-auto"
+              style={{ borderColor: '#E5E7EB', width: 'fit-content' }}
             >
-              <img
-                src={room.images[0]}
-                alt="hotel-img"
-                className="room-image"
-                title="View Room Details"
-              />
-            </div>
-
-            <div className="room-details mt-2">
-              <p className="text-gray-500 mb-1">{room.hotel.city}</p>
-
-              <h3
-                className="font-playfair room-title mb-1"
+              {/* Left: Room Image */}
+              <div
+                className="room-image-container"
                 onClick={() => {
                   navigate(`/rooms/${room._id}`);
                   scrollTo(0, 0);
                 }}
+                style={{ cursor: 'pointer' }}
               >
-                {room.hotel.name}
-              </h3>
-
-              <div className="d-flex align-items-center rating-row">
-                <StarRating rating={room.rating} />
-                <span className="ms-2">200+ reviews</span>
+                <img
+                  src={room.images[0]}
+                  alt="hotel-img"
+                  className="room-image rounded-4"
+                  title="View Room Details"
+                />
               </div>
 
+              {/* Right: Room Details */}
+              <div className="room-details mt-3 mt-md-0">
+                <p className="text-gray-500 mb-1">{room.hotel.city}</p>
+                <h3
+                  className="font-playfair room-title mb-1"
+                  onClick={() => {
+                    navigate(`/rooms/${room._id}`);
+                    scrollTo(0, 0);
+                  }}
+                >
+                  {room.hotel.name}
+                </h3>
 
-              <div className="d-flex align-items-center gap-1 mt-2 text-gray-500">
-                <img src={assets.locationIcon} alt="location-icon" />
-                <span>{room.hotel.address}</span>
+                {/* ⭐ Rating & Reviews */}
+                <div className="d-flex align-items-center rating-row">
+                  <StarRating rating={room.rating} />
+                  <span className="ms-2 fw-semibold text-dark">200+ reviews</span>
+                </div>
+
+                {/* 📍 Location */}
+                <div className="d-flex align-items-center gap-1 mt-2 text-gray-500">
+                  <img src={assets.locationIcon} alt="location-icon" />
+                  <span>{room.hotel.address}</span>
+                </div>
+
+                {/* Room Amenities */}
+                <div className="d-flex flex-wrap align-items-center mt-3 mb-4 gap-4">
+                  {room.amenities.map((item, index) => (
+                    <div
+                      key={index}
+                      className="d-flex align-items-center gap-2 px-3 py-2 rounded"
+                      style={{ backgroundColor: 'rgba(245, 245, 255, 0.7)' }}
+                    >
+                      <img
+                        src={facilityIcons[item]}
+                        alt={item}
+                        style={{ width: '20px', height: '20px' }}
+                      />
+                      <p className="text-xs mb-0">{item}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Room price per night */}
+                <p className="fs-6 fw-medium" style={{ color: '#374151' }}>
+                  ${room.pricePerNight} /night
+                </p>
               </div>
             </div>
+          ))}
+        </div>
+
+        {/* RIGHT: Filter Section */}
+        <div className="filter-section bg-white border text-secondary">
+
+          <div  className={`d-flex align-items-center justify-content-between px-4 py-2 ${openFilters ? "border-bottom" : ""} custom-border`}>
+            <p style={{ fontSize: '1rem', fontWeight: 500, color: '#1F2937' }}>FILTERS</p>
+            <div style={{ fontSize: '0.75rem', cursor: 'pointer' }}>
+              <span onClick={() => setOpenFilters(!openFilters)} className="d-lg-none">
+                {openFilters ? 'HIDE' : 'SHOW'}</span>
+              <span className='d-none d-lg-block'>CLEAR</span>
+            </div>
           </div>
-        ))}
+
+          <div   className={`transition-height overflow-hidden ${openFilters ? "auto-height" : "collapsed-height"}`}>
+            <div className="px-5 pt-5">
+              <p style={{ fontWeight: 500, color: '#1F2937', paddingBottom: '0.5rem' }}>Popular Filters</p>
+            </div>
+          </div>
+          
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default AllRooms
+export default AllRooms;

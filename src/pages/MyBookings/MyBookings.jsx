@@ -7,6 +7,7 @@ import { Button } from 'react-bootstrap'
 function MyBookings() {
 
     const [bookings, setBookings] = useState(userBookingsDummyData);
+    
     return (
         <div className="px-3 px-md-5"
             style={{

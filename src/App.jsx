@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Footer from './components/Footer/Footer'
 import AllRooms from './pages/AllRooms/AllRooms'
 import RoomDetails from './pages/RoomDetails/RoomDetails'
+import MyBookings from './pages/MyBookings/MyBookings'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/rooms' element={<AllRooms />} /> 
           <Route path='/rooms/:id' element={<RoomDetails />} />
+          <Route path='/my-bookings' element={<MyBookings />} />
         </Routes>
       </div>
       <Footer />

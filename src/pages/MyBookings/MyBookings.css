@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@media (min-width: 768px) {
+  .custom-grid {
+    grid-template-columns: 3fr 2fr 1fr;
+  }
+}
+
+.custom-grid:first-child {
+  border-top: 1px solid #D1D5DB;
+}
+
+@media (max-width: 768px) {
+  .custom-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

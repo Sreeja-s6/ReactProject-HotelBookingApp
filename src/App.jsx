@@ -6,6 +6,8 @@ import Footer from './components/Footer/Footer'
 import AllRooms from './pages/AllRooms/AllRooms'
 import RoomDetails from './pages/RoomDetails/RoomDetails'
 import MyBookings from './pages/MyBookings/MyBookings'
+import Login from './pages/Login'       // ✅ Login import
+import Register from './pages/Register' // ✅ Register import
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Route path='/rooms' element={<AllRooms />} /> 
           <Route path='/rooms/:id' element={<RoomDetails />} />
           <Route path='/my-bookings' element={<MyBookings />} />
+          <Route path='/login' element={<Login />} />         {/* ✅ Login route */}
+          <Route path='/register' element={<Register />} />   {/* ✅ Register route */}
         </Routes>
       </div>
       <Footer />

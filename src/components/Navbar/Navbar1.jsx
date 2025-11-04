@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navbar, Nav, Container, Button, Offcanvas } from 'react-bootstrap';
-import { Link, useLocation } from 'react-router-dom'; // ✅ add useLocation
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navbar1.css';
 import { assets } from '../../assets/assets';
 
@@ -12,8 +12,10 @@ const Navbar1 = () => {
     { name: 'Contact', path: '/contact' },
   ];
 
-  const location = useLocation(); // ✅ get current route path
-  const isHome = location.pathname === '/'; // ✅ check if it's the home page
+  const location = useLocation();
+  const navigate = useNavigate(); // ✅ place this here (not inside return)
+
+  const isHome = location.pathname === '/';
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,7 +28,6 @@ const Navbar1 = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // ✅ Decide if background should be transparent or solid
   const isTransparent = isHome && !isScrolled;
 
   return (
@@ -54,8 +55,8 @@ const Navbar1 = () => {
                 height: '40px',
                 width: 'auto',
                 filter: isTransparent
-                  ? 'invert(0) brightness(100)' // white logo on hero section
-                  : 'invert(1) brightness(0)', // black logo on white bg
+                  ? 'invert(0) brightness(100)'
+                  : 'invert(1) brightness(0)',
                 transition: 'filter 0.3s ease',
               }}
             />
@@ -92,6 +93,7 @@ const Navbar1 = () => {
             <Button
               variant={isTransparent ? 'light' : 'dark'}
               className="rounded-pill px-4"
+              onClick={() => navigate('/login')}
             >
               Login
             </Button>
@@ -132,7 +134,7 @@ const Navbar1 = () => {
               style={{
                 height: '36px',
                 width: 'auto',
-                filter: 'invert(1) brightness(0)', // black logo
+                filter: 'invert(1) brightness(0)',
               }}
             />
           </Offcanvas.Title>
@@ -151,7 +153,14 @@ const Navbar1 = () => {
             </Nav.Link>
           ))}
 
-          <Button variant="dark" className="rounded-pill px-4 py-2 mt-3">
+          <Button
+            variant="dark"
+            className="rounded-pill px-4 py-2 mt-3"
+            onClick={() => {
+              setIsMenuOpen(false);
+              navigate('/login');
+            }}
+          >
             Login
           </Button>
         </Offcanvas.Body>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./AllRooms.css";
 import Title from "../../components/Title";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { FaStar, FaRegHeart, FaHeart, FaMapMarkerAlt } from "react-icons/fa";
 
 function AllRooms() {
@@ -13,19 +14,30 @@ function AllRooms() {
     sort: "",
   });
 
+  const navigate = useNavigate();
+
   // ✅ Fetch data from db.json
   useEffect(() => {
     axios
-      .get("http://localhost:5001/hotels") // ✅ correct endpoint from your db.json
-      .then((res) => setRooms(res.data))
+      .get("http://localhost:5001/hotels")
+      .then((res) => {
+        console.log("Fetched Data:", res.data); // 👀 check data structure
+        setRooms(res.data);
+      })
       .catch((err) => console.error("Error fetching data:", err));
   }, []);
 
   // ✅ Toggle favorite
-  const toggleFavorite = (id) => {
+  const toggleFavorite = (id, e) => {
+    e.stopPropagation();
     setFavorites((prev) =>
       prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]
     );
+  };
+
+  // ✅ Navigate to RoomDetails
+  const handleCardClick = (id) => {
+    navigate(`/rooms/${id}`);
   };
 
   // ✅ Filter logic
@@ -64,16 +76,24 @@ function AllRooms() {
         <div className="rooms-grid">
           {filteredRooms.length > 0 ? (
             filteredRooms.map((room) => (
-              <div key={room.id} className="room-card shadow-sm border-0 rounded-4">
+              <div
+                key={room.id}
+                className="room-card shadow-sm border-0 rounded-4"
+                onClick={() => handleCardClick(room.id)}
+              >
                 <div className="room-image-wrapper">
                   <img
-                    src={room.image}
+                    src={
+                      Array.isArray(room.images) && room.images.length > 0
+                        ? room.images[0] // ✅ correct field
+                        : "https://via.placeholder.com/400x250?text=No+Image"
+                    }
                     alt={room.name}
                     className="room-image rounded-4"
                   />
                   <div
                     className="heart-icon"
-                    onClick={() => toggleFavorite(room.id)}
+                    onClick={(e) => toggleFavorite(room.id, e)}
                   >
                     {favorites.includes(room.id) ? (
                       <FaHeart color="red" size={20} />
@@ -95,7 +115,9 @@ function AllRooms() {
                       <FaStar
                         key={i}
                         size={16}
-                        color={i < Math.round(room.rating) ? "#F97316" : "#E5E7EB"}
+                        color={
+                          i < Math.round(room.rating) ? "#F97316" : "#E5E7EB"
+                        }
                       />
                     ))}
                     <span className="ms-2 text-dark fw-semibold small">
@@ -145,7 +167,9 @@ function AllRooms() {
                   checked={filters.type === type}
                   onChange={() => setFilters({ ...filters, type })}
                 />
-                <label className="form-check-label text-muted ms-2">{type}</label>
+                <label className="form-check-label text-muted ms-2">
+                  {type}
+                </label>
               </div>
             )
           )}
@@ -167,8 +191,7 @@ function AllRooms() {
           ))}
 
           <p className="fw-semibold text-dark mt-4">Sort By</p>
-          {[{ label: "Price Low to High", value: "low" },
-            { label: "Price High to Low", value: "high" }].map((sort) => (
+          {[{ label: "Price Low to High", value: "low" }, { label: "Price High to Low", value: "high" }].map((sort) => (
             <div key={sort.value} className="form-check small">
               <input
                 className="form-check-input"

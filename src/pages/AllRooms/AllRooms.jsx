@@ -1,33 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useContext } from "react";
 import "./AllRooms.css";
 import Title from "../../components/Title";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FaStar, FaRegHeart, FaHeart, FaMapMarkerAlt } from "react-icons/fa";
+import Filter from "../../components/Filter/Filter";
+import { HotelsContext } from "../../context/HotelsContext";
 
 function AllRooms() {
-  const [rooms, setRooms] = useState([]);
+  const rooms = useContext(HotelsContext); // Get hotels from context
   const [favorites, setFavorites] = useState([]);
   const [filters, setFilters] = useState({
     type: "",
     price: "",
     sort: "",
+    place: "",
   });
 
   const navigate = useNavigate();
 
-  // ✅ Fetch data from db.json
-  useEffect(() => {
-    axios
-      .get("http://localhost:5001/hotels")
-      .then((res) => {
-        console.log("Fetched Data:", res.data); // 👀 check data structure
-        setRooms(res.data);
-      })
-      .catch((err) => console.error("Error fetching data:", err));
-  }, []);
-
-  // ✅ Toggle favorite
   const toggleFavorite = (id, e) => {
     e.stopPropagation();
     setFavorites((prev) =>
@@ -35,19 +25,21 @@ function AllRooms() {
     );
   };
 
-  // ✅ Navigate to RoomDetails
   const handleCardClick = (id) => {
     navigate(`/rooms/${id}`);
   };
 
-  // ✅ Filter logic
   const filteredRooms = rooms
     .filter((room) => {
       if (filters.type && room.roomType !== filters.type) return false;
+
       if (filters.price) {
         const [min, max] = filters.price.split("-").map(Number);
-        return room.pricePerNight >= min && room.pricePerNight <= max;
+        if (room.pricePerNight < min || room.pricePerNight > max) return false;
       }
+
+      if (filters.place && room.place !== filters.place) return false;
+
       return true;
     })
     .sort((a, b) => {
@@ -56,9 +48,8 @@ function AllRooms() {
       return 0;
     });
 
-  // ✅ Clear filters
   const clearFilters = () => {
-    setFilters({ type: "", price: "", sort: "" });
+    setFilters({ type: "", price: "", sort: "", place: "" });
   };
 
   return (
@@ -85,7 +76,7 @@ function AllRooms() {
                   <img
                     src={
                       Array.isArray(room.images) && room.images.length > 0
-                        ? room.images[0] // ✅ correct field
+                        ? room.images[0]
                         : "https://via.placeholder.com/400x250?text=No+Image"
                     }
                     alt={room.name}
@@ -142,71 +133,12 @@ function AllRooms() {
         </div>
       </div>
 
-      {/* RIGHT SIDE – FILTERS */}
-      <div className="filter-section bg-white rounded-3 shadow-sm">
-        <div className="d-flex align-items-center justify-content-between px-4 py-3 border-bottom">
-          <h6 className="mb-0 fw-semibold text-dark">FILTERS</h6>
-          <span
-            className="fw-semibold text-dark"
-            style={{ fontSize: "0.85rem", cursor: "pointer" }}
-            onClick={clearFilters}
-          >
-            CLEAR
-          </span>
-        </div>
-
-        <div className="px-4 py-4">
-          <p className="fw-semibold text-dark">Popular Filters</p>
-          {["Single Bed", "Double Bed", "Luxury Room", "Family Suite"].map(
-            (type) => (
-              <div key={type} className="form-check small">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="type"
-                  checked={filters.type === type}
-                  onChange={() => setFilters({ ...filters, type })}
-                />
-                <label className="form-check-label text-muted ms-2">
-                  {type}
-                </label>
-              </div>
-            )
-          )}
-
-          <p className="fw-semibold text-dark mt-4">Price Range</p>
-          {["0-5000", "5000-6000", "6000-8000", "8000-9000"].map((range) => (
-            <div key={range} className="form-check small">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="price"
-                checked={filters.price === range}
-                onChange={() => setFilters({ ...filters, price: range })}
-              />
-              <label className="form-check-label text-muted ms-2">
-                ₹{range.replace("-", " to ₹")}
-              </label>
-            </div>
-          ))}
-
-          <p className="fw-semibold text-dark mt-4">Sort By</p>
-          {[{ label: "Price Low to High", value: "low" }, { label: "Price High to Low", value: "high" }].map((sort) => (
-            <div key={sort.value} className="form-check small">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="sort"
-                checked={filters.sort === sort.value}
-                onChange={() => setFilters({ ...filters, sort: sort.value })}
-              />
-              <label className="form-check-label text-muted ms-2">
-                {sort.label}
-              </label>
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* RIGHT SIDE – FILTER SECTION */}
+      <Filter
+        filters={filters}
+        setFilters={setFilters}
+        clearFilters={clearFilters}
+      />
     </div>
   );
 }

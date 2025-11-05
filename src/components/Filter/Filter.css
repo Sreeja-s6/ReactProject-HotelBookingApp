@@ -1,0 +1,48 @@
+.filter-section {
+  flex: 1;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  height: 100%;
+  align-self: stretch;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 100px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.filter-section .border-bottom {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 2;
+}
+
+/* Dropdown styling */
+.filter-section select.form-select {
+  font-size: 0.875rem;
+  padding: 0.35rem 0.5rem;
+}
+
+/* Scrollbar styling */
+.filter-section::-webkit-scrollbar {
+  width: 6px;
+}
+.filter-section::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+.filter-section::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .filter-section {
+    position: relative;
+    top: auto;
+    max-height: unset;
+    overflow: visible;
+  }
+}

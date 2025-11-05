@@ -3,7 +3,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 2rem;
-  padding: 6rem 3rem 3rem; /* ✅ Added top padding to avoid hiding under navbar */
+  padding: 6rem 3rem 3rem; /* top padding for navbar */
 }
 
 /* Title */
@@ -25,12 +25,13 @@
   gap: 2rem;
 }
 
-/* Individual room card */
+/* Room card */
 .room-card {
   background: #fff;
   border-radius: 16px;
   overflow: hidden;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .room-card:hover {
@@ -38,7 +39,7 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
-/* Image wrapper */
+/* Image */
 .room-image-wrapper {
   position: relative;
 }
@@ -61,48 +62,13 @@
   color: #2563eb;
 }
 
-/* No rooms message */
+/* No rooms text */
 .no-rooms-text {
   grid-column: 1 / -1;
   text-align: center;
   color: #6b7280;
   font-weight: 500;
   margin-top: 2rem;
-}
-
-/* Filter box */
-.filter-section {
-  flex: 1;
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 16px;
-  height: 100%;
-  align-self: stretch;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  position: sticky;
-  top: 100px;
-  max-height: calc(100vh - 120px); /* ✅ Keeps box visible inside viewport */
-  overflow-y: auto; /* ✅ Scroll inside filter box */
-}
-
-/* Sticky FILTER header inside the filter box */
-.filter-section .border-bottom {
-  position: sticky;
-  top: 0;
-  background: white;
-  z-index: 2; /* ensures it stays above radio list */
-}
-
-/* Scrollbar styling (optional, for better look) */
-.filter-section::-webkit-scrollbar {
-  width: 6px;
-}
-.filter-section::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 10px;
-}
-.filter-section::-webkit-scrollbar-thumb:hover {
-  background: #aaa;
 }
 
 /* Responsive */
@@ -115,19 +81,4 @@
   .rooms-grid {
     grid-template-columns: 1fr;
   }
-
-  .filter-section {
-    position: relative;
-    top: auto;
-    max-height: unset;
-    overflow: visible;
-  }
-}
-
-.room-card {
-  background: #fff;
-  border-radius: 16px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  cursor: pointer; /* ✅ Added */
 }

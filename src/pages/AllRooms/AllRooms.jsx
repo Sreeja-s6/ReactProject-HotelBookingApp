@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import "./AllRooms.css";
 import Title from "../../components/Title";
 import { useNavigate } from "react-router-dom";
@@ -6,10 +6,9 @@ import { FaStar, FaRegHeart, FaHeart, FaMapMarkerAlt } from "react-icons/fa";
 import Filter from "../../components/Filter/Filter";
 import { HotelsContext } from "../../context/HotelsContext";
 
-function AllRooms() {
+function AllRooms({ favorites, setFavorites }) {
   const rooms = useContext(HotelsContext); // Get hotels from context
-  const [favorites, setFavorites] = useState([]);
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = React.useState({
     type: "",
     price: "",
     sort: "",

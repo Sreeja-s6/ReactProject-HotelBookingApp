@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; // ✅ Import useNavigate
 import { Carousel, Button, Spinner, Container, Row, Col, Card } from "react-bootstrap";
 import "./RoomDetails.css";
 
 function RoomDetails() {
   const { id } = useParams();
+  const navigate = useNavigate(); // ✅ Initialize navigate
   const [hotel, setHotel] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -17,6 +18,11 @@ function RoomDetails() {
       })
       .catch((err) => console.error("Error fetching data:", err));
   }, [id]);
+
+  const handleBookNow = () => {
+    // Navigate to BookNow page with hotel ID
+    navigate(`/book-now/${id}`);
+  };
 
   if (loading) {
     return (
@@ -33,12 +39,10 @@ function RoomDetails() {
   return (
     <div className="room-details-page">
       <Container>
-        {/* Hotel Name */}
         <h2 className="hotel-name font-playfair">{hotel.name}</h2>
         <p className="hotel-location">{hotel.address}</p>
 
         <Row className="align-items-center">
-          {/* Carousel */}
           <Col md={7}>
             <Carousel interval={2500} pause={false} className="hotel-carousel rounded-4 shadow-sm">
               {hotel.images.map((img, index) => (
@@ -49,7 +53,6 @@ function RoomDetails() {
             </Carousel>
           </Col>
 
-          {/* Hotel Info */}
           <Col md={5}>
             <Card className="info-card shadow-sm">
               <Card.Body>
@@ -69,7 +72,9 @@ function RoomDetails() {
                 </div>
 
                 <div className="d-flex justify-content-end mt-3">
-                  <Button variant="primary" className="book-now-btn">Book Now</Button>
+                  <Button variant="primary" className="book-now-btn" onClick={handleBookNow}>
+                    Book Now
+                  </Button>
                 </div>
               </Card.Body>
             </Card>

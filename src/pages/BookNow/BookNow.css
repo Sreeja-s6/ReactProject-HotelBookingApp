@@ -1,0 +1,31 @@
+.book-now-page {
+  margin-top: 100px; /* Push below navbar */
+}
+
+.object-fit-cover {
+  object-fit: cover;
+}
+
+.book-now-page .card {
+  border: none;
+}
+
+.book-now-page .form-label {
+  font-weight: 500;
+}
+
+.book-now-page .fw-semibold {
+  font-weight: 600;
+}
+
+.loading {
+  margin-top: 100px;
+}
+
+.booknow-img {
+  height: 100%;
+  object-fit: cover;
+}
+
+
+

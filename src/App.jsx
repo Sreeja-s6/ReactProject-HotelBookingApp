@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Footer from './components/Footer/Footer'
 import AllRooms from './pages/AllRooms/AllRooms'
 import RoomDetails from './pages/RoomDetails/RoomDetails'
+import BookNow from './pages/BookNow/BookNow'
 import MyBookings from './pages/MyBookings/MyBookings'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -32,6 +33,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/rooms' element={<AllRooms />} />
             <Route path='/rooms/:id' element={<RoomDetails />} />
+            <Route path='/book-now/:id' element={<BookNow />} />  
             <Route path='/my-bookings' element={<MyBookings />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />

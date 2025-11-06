@@ -1,0 +1,16 @@
+.wishlist-container {
+  padding-top: 100px; /* To avoid overlapping with navbar */
+}
+
+table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+button {
+  transition: 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}

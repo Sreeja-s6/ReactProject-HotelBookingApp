@@ -22,3 +22,10 @@
   align-items: center;
   justify-content: center;
 }
+
+.dropdown-menu .dropdown-item:active,
+.dropdown-menu .dropdown-item:focus {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+

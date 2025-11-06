@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card, Form, Button, Spinner } from "react-bootstrap";
 import "./BookNow.css";
 
 function BookNow() {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [hotel, setHotel] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -14,6 +16,7 @@ function BookNow() {
     contact: "",
     checkIn: "",
     checkOut: "",
+    guests: 1, // default to 1
   });
 
   const [errors, setErrors] = useState({});
@@ -27,33 +30,49 @@ function BookNow() {
         setHotel(data);
         setLoading(false);
       })
-      .catch((err) => console.error("Error fetching hotel:", err));
+      .catch((err) => {
+        console.error("Error fetching hotel:", err);
+        setLoading(false);
+      });
   }, [id]);
 
-  // Calculate total price when dates change
+  // Calculate total price when dates or guests change
   useEffect(() => {
-    if (hotel && formData.checkIn && formData.checkOut) {
-      const checkInDate = new Date(formData.checkIn);
-      const checkOutDate = new Date(formData.checkOut);
+    if (!hotel) {
+      setTotalPrice(0);
+      return;
+    }
+
+    const { checkIn, checkOut, guests } = formData;
+    if (checkIn && checkOut) {
+      const checkInDate = new Date(checkIn);
+      const checkOutDate = new Date(checkOut);
 
       if (checkOutDate > checkInDate) {
+        const msPerDay = 1000 * 60 * 60 * 24;
         const diffTime = checkOutDate - checkInDate;
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        setTotalPrice(diffDays * hotel.pricePerNight);
+        // use exact day difference (should be integer because date inputs are midnight)
+        const diffDays = Math.round(diffTime / msPerDay);
+        const validGuests = Number.isInteger(+guests) && +guests >= 1 ? +guests : 1;
+        setTotalPrice(diffDays * hotel.pricePerNight * validGuests);
       } else {
         setTotalPrice(0);
       }
+    } else {
+      setTotalPrice(0);
     }
-  }, [formData.checkIn, formData.checkOut, hotel]);
+  }, [formData.checkIn, formData.checkOut, formData.guests, hotel]);
 
   const validateField = (name, value) => {
     switch (name) {
       case "name":
-        return /^[A-Za-z ]+$/.test(value) ? "" : "Name can contain only letters and spaces";
+        return value.trim() === "" ? "Name is required" : (/^[A-Za-z ]+$/.test(value) ? "" : "Name can contain only letters and spaces");
       case "email":
-        return /^[\w.-]+@[\w.-]+\.\w{2,4}$/.test(value) ? "" : "Enter a valid email";
+        return value.trim() === "" ? "Email is required" : (/^[\w.-]+@[\w.-]+\.\w{2,4}$/.test(value) ? "" : "Enter a valid email");
       case "contact":
-        return /^\d{10}$/.test(value) ? "" : "Enter a valid 10-digit phone number";
+        return value.trim() === "" ? "Contact is required" : (/^\d{10}$/.test(value) ? "" : "Enter a valid 10-digit phone number");
+      case "guests":
+        return Number(value) >= 1 ? "" : "At least 1 guest is required";
       default:
         return "";
     }
@@ -61,27 +80,35 @@ function BookNow() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    setErrors({ ...errors, [name]: validateField(name, value) });
+    const newValue = name === "guests" ? (value === "" ? "" : parseInt(value, 10)) : value;
+    setFormData((prev) => ({ ...prev, [name]: newValue }));
+    setErrors((prev) => ({ ...prev, [name]: validateField(name, newValue) }));
   };
 
   const handlePayNow = (e) => {
     e.preventDefault();
 
+    // Validate all fields
     const newErrors = {};
     Object.keys(formData).forEach((key) => {
       const error = validateField(key, formData[key]);
       if (error) newErrors[key] = error;
     });
 
+    // Date-specific checks
     if (!formData.checkIn) newErrors.checkIn = "Check-in date is required";
     if (!formData.checkOut) newErrors.checkOut = "Check-out date is required";
-    if (
-      formData.checkIn &&
-      formData.checkOut &&
-      new Date(formData.checkOut) <= new Date(formData.checkIn)
-    ) {
-      newErrors.checkOut = "Check-out date must be after check-in date";
+    if (formData.checkIn && formData.checkOut) {
+      const checkInDate = new Date(formData.checkIn);
+      const checkOutDate = new Date(formData.checkOut);
+      if (checkOutDate <= checkInDate) {
+        newErrors.checkOut = "Check-out date must be after check-in date";
+      }
+    }
+
+    // Guests default/validation
+    if (formData.guests === "" || formData.guests < 1) {
+      newErrors.guests = "At least 1 guest is required";
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -89,19 +116,41 @@ function BookNow() {
       return;
     }
 
-    alert(`Booking confirmed for ${hotel.name}!\nTotal Price: ₹${totalPrice}`);
-    console.log({ ...formData, totalPrice, hotelName: hotel.name });
+    // Build booking object in the shape MyBookings.jsx expects
+    const booking = {
+      id: Date.now(), // unique id
+      hotel: hotel, // full hotel object (so MyBookings can access hotel.name, hotel.images[0], hotel.address, roomType if present)
+      name: formData.name,
+      email: formData.email,
+      contact: formData.contact,
+      checkInDate: formData.checkIn,
+      checkOutDate: formData.checkOut,
+      guests: formData.guests,
+      totalPrice,
+    };
 
-    // Clear the form after confirmation
-  setFormData({
-    name: "",
-    email: "",
-    contact: "",
-    checkIn: "",
-    checkOut: "",
-  });
-  setErrors({});
-  setTotalPrice(0);
+    // Save to localStorage (append to existing bookings)
+    const existing = JSON.parse(localStorage.getItem("bookings")) || [];
+    existing.push(booking);
+    localStorage.setItem("bookings", JSON.stringify(existing));
+
+    // Show confirmation alert (synchronous; code continues after user clicks OK)
+    window.alert(`Booking confirmed for ${hotel.name}!\nGuests: ${formData.guests}\nTotal Price: ₹${totalPrice}`);
+
+    // Clear form and errors
+    setFormData({
+      name: "",
+      email: "",
+      contact: "",
+      checkIn: "",
+      checkOut: "",
+      guests: 1,
+    });
+    setErrors({});
+    setTotalPrice(0);
+
+    // Redirect to My Bookings page
+    navigate("/my-bookings");
   };
 
   if (loading) {
@@ -125,7 +174,7 @@ function BookNow() {
             <Card className="shadow-sm h-100">
               <Card.Img
                 variant="top"
-                src={hotel.images[0]}
+                src={hotel.images && hotel.images.length ? hotel.images[0] : ""}
                 alt={hotel.name}
                 className="rounded-4"
                 style={{ height: "400px", objectFit: "cover" }}
@@ -177,6 +226,19 @@ function BookNow() {
                     isInvalid={!!errors.contact}
                   />
                   <Form.Control.Feedback type="invalid">{errors.contact}</Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Number of Guests</Form.Label>
+                  <Form.Control
+                    type="number"
+                    name="guests"
+                    min="1"
+                    value={formData.guests}
+                    onChange={handleChange}
+                    isInvalid={!!errors.guests}
+                  />
+                  <Form.Control.Feedback type="invalid">{errors.guests}</Form.Control.Feedback>
                 </Form.Group>
 
                 <Row className="mb-3">

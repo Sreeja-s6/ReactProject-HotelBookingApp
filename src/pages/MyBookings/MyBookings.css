@@ -1,17 +1,111 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-@media (min-width: 768px) {
-  .custom-grid {
-    grid-template-columns: 3fr 2fr 1fr;
-  }
+.mybookings-page {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+  display: flex;
+  justify-content: center;
 }
 
-.custom-grid:first-child {
-  border-top: 1px solid #D1D5DB;
+.mybookings-wrapper {
+  width: 100%;
+  max-width: 75rem;
+  padding-left: 5rem; /* 👈 Same left padding for title + table */
+  padding-right: 2rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.booking-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #1f2937;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+  font-weight: 600;
+  border-bottom: 2px solid #d1d5db;
+  padding-bottom: 0.8rem;
+}
+
+.table-header div {
+  padding-left: 0.5rem;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1.8rem 0;
+}
+
+.hotel-info {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.hotel-img {
+  width: 140px; /* 👈 Increased image size */
+  height: 95px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.hotel-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.3rem;
+}
+
+.room-type {
+  font-weight: 400;
+  color: #6b7280;
+  font-size: 15px;
+}
+
+.location-icon {
+  width: 14px;
+  height: 14px;
+  opacity: 0.7;
+}
+
+.guests-col,
+.date-col,
+.price-col {
+  text-align: left;
+  padding-left: 0.5rem;
+  font-size: 15px;
+  color: #374151;
+}
+
+.price-col {
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {
-  .custom-grid {
-    grid-template-columns: 1fr !important;
+  .table-header {
+    display: none;
+  }
+
+  .table-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hotel-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .guests-col,
+  .date-col,
+  .price-col {
+    padding-left: 0;
   }
 }

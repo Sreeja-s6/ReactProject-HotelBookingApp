@@ -29,3 +29,7 @@
   color: inherit !important;
 }
 
+#dropdown-user::after {
+  display: none; /* removes the default arrow */
+}
+

@@ -54,24 +54,6 @@ function Footer() {
                             Subscribe to our newsletter for travel inspiration and special offers.
                         </p>
 
-                        {/* Input and arrow button */}
-                        <Form className="d-flex align-items-center mt-2 footer-form">
-                            <Form.Control
-                                type="email"
-                                placeholder="Your email"
-                                className="me-2 footer-input"
-                            />
-                            <Button variant="dark" className="footer-arrow-btn">
-                                <img
-                                    src={assets.arrowIcon}
-                                    alt="arrow icon"
-                                    width={14}
-                                    height={14}
-                                    className="footer-arrow-icon"
-                                />
-
-                            </Button>
-                        </Form>
                     </Col>
                 </Row>
 

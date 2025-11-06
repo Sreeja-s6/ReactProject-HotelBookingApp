@@ -1,18 +1,10 @@
-.arrow-btn {
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+.exclusiveOffers-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.arrow-btn:hover {
-  background-color: #f9fafb; /* same as Tailwind hover:bg-gray-50 */
-  border-color: #d1d5db;
-}
-
-.arrow-icon {
-  transition: transform 0.3s ease;
-  width: 18px;
-  height: 18px;
-}
-
-.arrow-btn:hover .arrow-icon {
-  transform: translateX(4px);
+.exclusiveOffers-card img {
+  height: 300px; /* fix the image height */
+  object-fit: cover; /* crop/fit image to cover the area */
 }

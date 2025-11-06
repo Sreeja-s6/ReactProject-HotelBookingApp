@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 function Login() {
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // If user came from a protected route, redirect back after login
+  const from = location.state?.from?.pathname || '/';
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,14 +24,14 @@ function Login() {
       registeredUser.password === loginData.password
     ) {
       localStorage.setItem('authUser', JSON.stringify(registeredUser));
-      navigate('/'); // redirect to home after login
+      navigate(from, { replace: true }); // redirect to original page or home
     } else {
       alert('Invalid credentials!');
     }
   };
 
   const handleClose = () => {
-    navigate('/'); // redirect to home page
+    navigate('/'); // redirect to home page if user closes login
   };
 
   return (

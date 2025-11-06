@@ -9,9 +9,10 @@
       "pricePerNight": 4999,
       "roomType": "Double Bed",
       "amenities": ["Free WiFi", "Pool Access", "Breakfast Included"],
-      "images": ["https://images.pexels.com/photos/33389169/pexels-photo-33389169.jpeg",
-                "https://images.pexels.com/photos/33389169/pexels-photo-33389169.jpeg",
-                "https://images.pexels.com/photos/33389169/pexels-photo-33389169.jpeg"
+      "images": [
+        "https://images.pexels.com/photos/33389169/pexels-photo-33389169.jpeg",
+        "https://images.pexels.com/photos/33389169/pexels-photo-33389169.jpeg",
+        "https://images.pexels.com/photos/33389169/pexels-photo-33389169.jpeg"
       ],
       "reviews": 230
     },
@@ -24,10 +25,11 @@
       "pricePerNight": 3299,
       "roomType": "Single Bed",
       "amenities": ["Free WiFi", "Breakfast Included"],
-      "images": ["https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
-                "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
-                "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg"
-    ],
+      "images": [
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg"
+      ],
       "reviews": 180
     },
     {
@@ -39,10 +41,11 @@
       "pricePerNight": 6999,
       "roomType": "Luxury Room",
       "amenities": ["Free WiFi", "Sea View", "Room Service", "Pool Access"],
-      "images": ["https://images.pexels.com/photos/2467285/pexels-photo-2467285.jpeg",
-                "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
-                "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg"
-    ],
+      "images": [
+        "https://images.pexels.com/photos/2467285/pexels-photo-2467285.jpeg",
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg"
+      ],
       "reviews": 340
     },
     {
@@ -54,10 +57,11 @@
       "pricePerNight": 7999,
       "roomType": "Luxury Room",
       "amenities": ["Free WiFi", "Room Service", "Pool Access"],
-      "images": ["https://images.pexels.com/photos/3770291/pexels-photo-3770291.jpeg",
-      "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
-      "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg"
-    ],
+      "images": [
+        "https://images.pexels.com/photos/3770291/pexels-photo-3770291.jpeg",
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg"
+      ],
       "reviews": 310
     },
     {
@@ -69,10 +73,11 @@
       "pricePerNight": 4499,
       "roomType": "Double Bed",
       "amenities": ["Free WiFi", "Breakfast Included"],
-      "images": ["https://images.pexels.com/photos/6580216/pexels-photo-6580216.jpeg",
-      "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
-      "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg"]
-      ,
+      "images": [
+        "https://images.pexels.com/photos/6580216/pexels-photo-6580216.jpeg",
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg"
+      ],
       "reviews": 200
     },
     {
@@ -84,10 +89,11 @@
       "pricePerNight": 5599,
       "roomType": "Family Suite",
       "amenities": ["Mountain View", "Room Service", "Free WiFi"],
-      "images": ["https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg",
-      "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
-      "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg"
-    ],
+      "images": [
+        "https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg",
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg"
+      ],
       "reviews": 270
     },
     {
@@ -99,10 +105,11 @@
       "pricePerNight": 3499,
       "roomType": "Double Bed",
       "amenities": ["Free WiFi", "Mountain View"],
-      "images": ["https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg",
-      "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
-      "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg"
-    ],
+      "images": [
+        "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg",
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg"
+      ],
       "reviews": 150
     },
     {
@@ -114,10 +121,11 @@
       "pricePerNight": 8999,
       "roomType": "Luxury Room",
       "amenities": ["Mountain View", "Free Breakfast", "Room Service"],
-      "images": ["https://images.pexels.com/photos/30761844/pexels-photo-30761844.jpeg",
-      "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
-      "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg"
-    ],
+      "images": [
+        "https://images.pexels.com/photos/30761844/pexels-photo-30761844.jpeg",
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg"
+      ],
       "reviews": 420
     },
     {
@@ -129,10 +137,11 @@
       "pricePerNight": 4799,
       "roomType": "Family Suite",
       "amenities": ["Free WiFi", "Breakfast Included", "Mountain View"],
-      "images": ["https://images.pexels.com/photos/32829704/pexels-photo-32829704.jpeg",
-      "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
-      "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg"
-    ],
+      "images": [
+        "https://images.pexels.com/photos/32829704/pexels-photo-32829704.jpeg",
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg"
+      ],
       "reviews": 260
     },
     {
@@ -144,11 +153,64 @@
       "pricePerNight": 2899,
       "roomType": "Single Bed",
       "amenities": ["Free WiFi", "Room Service"],
-      "images": ["https://images.pexels.com/photos/11038192/pexels-photo-11038192.jpeg",
-      "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
-      "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg"
-    ],
+      "images": [
+        "https://images.pexels.com/photos/11038192/pexels-photo-11038192.jpeg",
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg",
+        "https://images.pexels.com/photos/9954175/pexels-photo-9954175.jpeg"
+      ],
       "reviews": 190
+    }
+  ],
+  "exclusiveOffers": [
+    {
+      "id": 1,
+      "title": "Summer Escape Package",
+      "description": "Enjoy a complimentary night and daily breakfast",
+      "priceOff": 25,
+      "expiryDate": "Aug 31",
+      "image": "https://images.pexels.com/photos/2983472/pexels-photo-2983472.jpeg"
+    },
+    {
+      "id": 2,
+      "title": "Romantic Getaway",
+      "description": "Special couples package including spa treatment",
+      "priceOff": 20,
+      "expiryDate": "Sep 20",
+      "image": "https://images.pexels.com/photos/5619280/pexels-photo-5619280.jpeg"
+    },
+    {
+      "id": 3,
+      "title": "Luxury Retreat",
+      "description": "Book 60 days in advance and save on your stay",
+      "priceOff": 30,
+      "expiryDate": "Sep 25",
+      "image": "https://images.pexels.com/photos/2901215/pexels-photo-2901215.jpeg"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Emma Rodriguez",
+      "address": "Barcelona, Spain",
+      "image": "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200",
+      "rating": 5,
+      "review": "I've used many booking platforms before, but none compare to the personalized experience and attention to detail that QuickStay provides."
+    },
+    {
+      "id": 2,
+      "name": "Liam Johnson",
+      "address": "New York, USA",
+      "image": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200",
+      "rating": 4,
+      "review": "QuickStay exceeded my expectations. The booking process was seamless, and the hotels were absolutely top-notch. Highly recommended!"
+    },
+    {
+      "id": 3,
+      "name": "Sophia Lee",
+      "address": "Seoul, South Korea",
+      "image": "https://images.unsplash.com/photo-1701615004837-40d8573b6652?q=80&w=200",
+      "rating": 5,
+      "review": "Amazing service! I always find the best luxury accommodations through QuickStay. Their recommendations never disappoint!"
     }
   ]
 }

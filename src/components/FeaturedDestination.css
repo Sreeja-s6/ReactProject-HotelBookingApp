@@ -1,0 +1,62 @@
+/* 🌎 Shared section styling */
+.featured-section {
+  background-color: var(--featured-bg);
+  color: var(--featured-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+/* --- Title text --- */
+.featured-section h1,
+.featured-section p {
+  color: var(--featured-text);
+}
+
+/* --- Button --- */
+.view-all-btn {
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border: 1px solid var(--btn-border);
+  font-weight: 500;
+  padding: 10px 24px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.view-all-btn:hover {
+  background-color: var(--btn-hover-bg);
+  color: var(--btn-hover-text);
+  border-color: var(--btn-hover-border);
+}
+
+/* 🌞 Light Mode Variables */
+:root {
+  --featured-bg: #f8fafc;
+  --featured-text: #111;
+  --btn-bg: #fff;
+  --btn-text: #111;
+  --btn-border: #ccc;
+  --btn-hover-bg: #111;
+  --btn-hover-text: #fff;
+  --btn-hover-border: #111;
+}
+
+/* 🌙 Dark Mode Variables (✅ use [data-theme="dark"]) */
+[data-theme="dark"] {
+  --featured-bg: #1a1d21;
+  --featured-text: #f5f5f5;
+  --btn-bg: #2a2e33;
+  --btn-text: #f5f5f5;
+  --btn-border: #444;
+  --btn-hover-bg: #f5f5f5;
+  --btn-hover-text: #111;
+  --btn-hover-border: #f5f5f5;
+}
+
+/* Optional tweak for cards in dark mode */
+[data-theme="dark"] .card {
+  background-color: #222 !important;
+  color: #f5f5f5 !important;
+  border: 1px solid #333 !important;
+}

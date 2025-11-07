@@ -1,68 +1,80 @@
 .footer {
-  background-color: #f8fafc; /* very light blue-gray like Figma */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 🌞 Light Mode */
+.footer-light {
+  background-color: #f8fafc;
   color: #333;
 }
 
-/* --- Logo --- */
+.footer-light .footer-logo {
+  filter: brightness(0) saturate(100%);
+}
+
+.footer-light .footer-icon {
+  color: #6c757d;
+}
+
+.footer-light .footer-icon:hover {
+  color: #111;
+}
+
+.footer-light .footer-links li a {
+  color: #6c757d;
+}
+
+.footer-light .footer-links li a:hover {
+  color: #111;
+}
+
+.footer-light hr {
+  border-color: rgba(0, 0, 0, 0.07);
+}
+
+/* 🌙 Dark Mode */
+.footer-dark {
+  background-color: #0e0e0e; /* 🔥 true dark gray/black tone */
+  color: #f5f5f5;
+}
+
+.footer-dark .footer-logo {
+  filter: brightness(0) invert(1);
+}
+
+.footer-dark .footer-icon {
+  color: #aaaaaa;
+}
+
+.footer-dark .footer-icon:hover {
+  color: #ffffff;
+}
+
+.footer-dark .footer-links li a {
+  color: #aaaaaa;
+}
+
+.footer-dark .footer-links li a:hover {
+  color: #ffffff;
+}
+
+.footer-dark hr {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Shared styles */
 .footer-logo {
   width: 150px;
   display: block;
-  filter: brightness(0) saturate(100%); /* makes white logo black */
 }
 
-/* --- Description text under logo --- */
 .footer-desc {
   max-width: 300px;
   line-height: 1.6;
 }
 
-/* --- Social Icons --- */
-.footer-icon {
-  color: #6c757d;
-  font-size: 1.1rem;
-  transition: color 0.2s ease;
-}
-.footer-icon:hover {
-  color: #111;
-}
-
-/* --- Links --- */
 .footer-links li {
   margin-bottom: 0.45rem;
-}
-.footer-links li a {
-  color: #6c757d;
-  text-decoration: none;
-}
-.footer-links li a:hover {
-  color: #111;
-}
-
-/* --- Input + Arrow Button --- */
-.footer-form {
-  gap: 0.4rem;
-}
-.footer-input {
-  background: #fff;
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
-  padding: 0.6rem 0.9rem;
-  flex: 1;
-}
-
-.footer-arrow-btn {
-  padding: 0;         /* remove extra space inside the button */
-  margin-left: 0;     /* ensure it touches the search box */
-  border: none;       /* optional if border appears */
-  height: 100%;       /* matches input height */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* --- Bottom --- */
-hr {
-  border-color: rgba(0, 0, 0, 0.07);
 }
 
 .footer small,
@@ -72,5 +84,5 @@ hr {
 }
 
 .footer .footer-arrow-icon {
-    filter: brightness(0) invert(1);
+  filter: brightness(0) invert(1);
 }

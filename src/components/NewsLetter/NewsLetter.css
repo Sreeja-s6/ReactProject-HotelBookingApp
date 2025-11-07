@@ -1,12 +1,16 @@
+/* 🌞 Light Mode */
 .newsletter-section {
-  background-color: #fff; /* outer dark section */
+  background-color: #ffffff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-bottom: 0 !important;
 }
 
 .newsletter-box {
-  background-color: #1a1f35; /* inner card color */
-  color: #fff;
+  background-color: #1a1f35;
+  color: #ffffff;
   width: 70%;
   max-width: 800px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .newsletter-box h1 {
@@ -16,7 +20,7 @@
 }
 
 .newsletter-box p {
-  color: rgba(255, 255, 255, 0.85) !important; /* make subtitle visible */
+  color: rgba(255, 255, 255, 0.85) !important;
   font-size: 1rem;
   line-height: 1.6;
 }
@@ -50,5 +54,45 @@
 }
 
 .newsletter-box .last {
-    font-size: 13px;
+  font-size: 13px;
+}
+
+/* 🌙 Dark Mode */
+[data-theme="dark"] .newsletter-section {
+  background-color: #111; /* matches footer background */
+  margin-bottom: 0; /* removes spacing if any */
+  padding-bottom: 0; /* keeps it flush */
+}
+
+[data-theme="dark"] .newsletter-box {
+  background-color: #181818;
+}
+
+
+[data-theme="dark"] .newsletter-box {
+  background-color: #181818; /* neutral dark inner box */
+  color: #f5f5f5;
+}
+
+[data-theme="dark"] .newsletter-box p {
+  color: rgba(245, 245, 245, 0.85) !important;
+}
+
+[data-theme="dark"] .newsletter-input {
+  background-color: #111;
+  color: #fff;
+  border: 1px solid #333;
+}
+
+[data-theme="dark"] .newsletter-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+[data-theme="dark"] .newsletter-btn {
+  background-color: #f5f5f5 !important;
+  color: #000 !important;
+}
+
+[data-theme="dark"] .newsletter-btn:hover img {
+  transform: translateX(4px);
 }

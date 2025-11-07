@@ -1,8 +1,33 @@
+.hero-section {
+  position: relative;
+  background-image: url("/src/assets/heroImage.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  color: var(--hero-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--hero-overlay);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+}
+
 .custom-pill {
   background-color: rgba(73, 185, 255, 0.5);
-  padding: 0.25rem 0.875rem; 
+  padding: 0.25rem 0.875rem;
   border-radius: 9999px;
-  margin-top: 5rem;
   color: white;
 }
 
@@ -12,62 +37,128 @@
   font-size: 2rem;
   max-width: 36rem;
   margin-top: 1rem;
-  color: #fff;
-}
-
-.font-playfair {
-  font-family: 'Playfair', serif !important;
 }
 
 @media (min-width: 768px) {
   .hero-heading {
-    font-size: 56px;
-    line-height: 56px;
-    font-weight: 800;
+    font-size: 3.5rem;
+    line-height: 1.1;
   }
 }
 
 .hero-paragraph {
   max-width: 500px;
-  margin-top: 0.5rem; 
-  font-size: 0.875rem; 
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: var(--hero-text);
 }
 
-@media (min-width: 768px) {
-  .hero-paragraph {
-    font-size: 1rem; 
-  }
+/* ---------- Form Styles ---------- */
+.hero-form {
+  background-color: var(--form-bg);
+  color: var(--form-text);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 925px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end; /* ✅ Align fields and button properly */
+  gap: 1rem;
 }
 
-/* Align icon and label text perfectly */
+.form-field {
+  flex: 1;
+  min-width: 150px;
+}
+
+.align-end {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.hero-form input {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+}
+
+/* ✅ Search Button (no blue color) */
+.search-btn {
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border: 1px solid var(--btn-border);
+  transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+  background-color: var(--btn-hover-bg);
+  color: var(--btn-hover-text);
+  border-color: var(--btn-hover-border);
+}
+
+/* Labels */
 .label-row {
   display: flex;
-  align-items: center; /* vertically centers icons and text */
-  gap: 6px; /* space between icon and label */
+  align-items: center;
+  gap: 6px;
   margin-bottom: 6px;
+  font-weight: 500;
 }
 
 .label-row svg {
-  font-size: 16px; /* consistent icon size */
-  color: #333;
+  color: var(--icon-color);
 }
 
-.label-row img {
-  width: 16px;
-  height: 16px;
-  object-fit: contain;
-  margin-top: -1px; /* tiny adjustment for perfect vertical alignment */
+/* 🌞 Light Theme */
+:root {
+  --hero-text: #fff;
+  --hero-overlay: rgba(0, 0, 0, 0.3);
+  --form-bg: #fff;
+  --form-text: #111;
+  --btn-bg: #111;
+  --btn-text: #fff;
+  --btn-border: #111;
+  --btn-hover-bg: #333;
+  --btn-hover-text: #fff;
+  --btn-hover-border: #333;
+  --icon-color: #333;
 }
 
-.label-row label {
-  margin-bottom: 0; /* remove default bootstrap label spacing */
-  font-weight: 500;
-  font-size: 0.95rem;
+/* 🌙 Dark Theme */
+[data-theme="dark"] {
+  --hero-overlay: rgba(0, 0, 0, 0.6);
+  --hero-text: #f5f5f5;
+  --form-bg: #2a2e33;
+  --form-text: #f5f5f5;
+  --btn-bg: #f5f5f5;
+  --btn-text: #111;
+  --btn-border: #f5f5f5;
+  --btn-hover-bg: #ddd;
+  --btn-hover-text: #111;
+  --btn-hover-border: #ddd;
+  --icon-color: #f5f5f5;
 }
 
-@media (min-width: 768px) {
-  .label-row button {
-    margin-left: 20px;
+/* 🌐 Responsive Form Adjustments */
+@media (max-width: 768px) {
+  .hero-section {
+    height: auto;
+    padding: 4rem 1rem;
+  }
+
+  .hero-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .align-end {
+    width: 100%;
+  }
+
+  .search-btn {
+    width: 100%;
   }
 }
-

@@ -1,0 +1,56 @@
+/* ===== Section Backgrounds ===== */
+.testimonial-section {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.testimonial-light {
+  background-color: #f8fafc;
+  color: #111;
+}
+
+.testimonial-dark {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+/* ===== Cards ===== */
+.testimonial-card {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  animation: fadeInUp 0.6s ease both;
+}
+
+.card-light {
+  background-color: #ffffff;
+  color: #111;
+}
+
+.card-dark {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+  border: 1px solid #2a2a2a;
+}
+
+/* ===== Review text ===== */
+.testimonial-review {
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+  opacity: 0.9;
+}
+
+/* Small address tone */
+.testimonial-address {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+/* ===== Animation ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

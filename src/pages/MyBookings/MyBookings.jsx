@@ -9,9 +9,23 @@ function MyBookings() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Get logged-in user from localStorage
+    const authUser = JSON.parse(localStorage.getItem('authUser'));
+    if (!authUser) {
+      navigate('/login'); // redirect if not logged in
+      return;
+    }
+
+    // Get all bookings
     const storedBookings = JSON.parse(localStorage.getItem('bookings')) || [];
-    setBookings(storedBookings);
-  }, []);
+
+    // Filter only bookings of the logged-in user
+    const userBookings = storedBookings.filter(
+      (booking) => booking.email === authUser.email
+    );
+
+    setBookings(userBookings);
+  }, [navigate]);
 
   return (
     <div className="mybookings-page">
@@ -24,14 +38,20 @@ function MyBookings() {
 
         {bookings.length === 0 ? (
           <div className="text-center mt-5">
-            <p style={{ fontSize: '1.1rem', color: '#6B7280' }}>
-              You have <strong>0 bookings</strong> yet.
+            <p style={{ fontSize: '1.3rem', color: '#6B7280', fontWeight: '500' }}>
+              You didn't book anything yet.
             </p>
             <p
-              style={{ color: '#2563EB', cursor: 'pointer', fontWeight: '500' }}
-              onClick={() => navigate('/hotels')}
+              style={{
+                fontSize: '1.25rem',
+                color: '#2563EB',
+                cursor: 'pointer',
+                fontWeight: '600',
+                marginTop: '10px',
+              }}
+              onClick={() => navigate('/rooms')}
             >
-              Book your first stay now!
+              Book your stay now!
             </p>
           </div>
         ) : (
@@ -51,15 +71,15 @@ function MyBookings() {
                 {/* Hotel Column */}
                 <div className="hotel-info">
                   <img
-                    src={booking.hotel.images[0]}
-                    alt="hotel"
+                    src={booking.hotel?.images ? booking.hotel.images[0] : ''}
+                    alt={booking.hotel?.name || 'Hotel'}
                     className="hotel-img"
                   />
                   <div>
                     <p className="hotel-name">
-                      {booking.hotel.name}{' '}
+                      {booking.hotel?.name || 'N/A'}{' '}
                       <span className="room-type">
-                        ({booking.hotel.roomType})
+                        ({booking.hotel?.roomType || 'N/A'})
                       </span>
                     </p>
                     <div className="d-flex align-items-center gap-1 small text-secondary">
@@ -68,7 +88,7 @@ function MyBookings() {
                         alt="location"
                         className="location-icon"
                       />
-                      <span>{booking.hotel.address}</span>
+                      <span>{booking.hotel?.address || 'N/A'}</span>
                     </div>
                   </div>
                 </div>
@@ -87,7 +107,7 @@ function MyBookings() {
                 </div>
 
                 {/* Total Price */}
-                <div className="price-col">₹{booking.totalPrice}</div>
+                <div className="price-col">₹{booking.totalPrice || 0}</div>
               </div>
             ))}
           </div>

@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 function Login() {
-  const [loginData, setLoginData] = useState({ email: '', password: '' });
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
   const location = useLocation();
-
-  // If user came from a protected route, redirect back after login
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || "/";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,118 +14,40 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const registeredUser = JSON.parse(localStorage.getItem('registeredUser'));
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const matchedUser = users.find(
+      (u) => u.email === loginData.email && u.password === loginData.password
+    );
 
-    if (
-      registeredUser &&
-      registeredUser.email === loginData.email &&
-      registeredUser.password === loginData.password
-    ) {
-      localStorage.setItem('authUser', JSON.stringify(registeredUser));
-      navigate(from, { replace: true }); // redirect to original page or home
+    if (matchedUser) {
+      localStorage.setItem("authUser", JSON.stringify(matchedUser));
+      navigate(from, { replace: true });
     } else {
-      alert('Invalid credentials!');
+      alert("Invalid credentials!");
     }
   };
 
   const handleClose = () => {
-    navigate('/'); // redirect to home page if user closes login
+    navigate("/");
   };
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100vw',
-        height: '100vh',
-        backgroundColor: 'rgba(0,0,0,0.5)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 9999,
-      }}
-    >
-      <div
-        style={{
-          backgroundColor: '#fff',
-          borderRadius: '12px',
-          padding: '30px 25px',
-          width: '100%',
-          maxWidth: '400px',
-          position: 'relative',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
-        }}
-      >
-        {/* Close Button */}
-        <button
-          onClick={handleClose}
-          style={{
-            position: 'absolute',
-            top: '12px',
-            right: '12px',
-            background: 'transparent',
-            border: 'none',
-            fontSize: '1.5rem',
-            cursor: 'pointer',
-            fontWeight: 'bold',
-          }}
-        >
-          &times;
-        </button>
+    <div style={{ position:"fixed", top:0, left:0, width:"100vw", height:"100vh", backgroundColor:"rgba(0,0,0,0.5)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:9999 }}>
+      <div style={{ backgroundColor:"#000", color:"#fff", borderRadius:"12px", padding:"30px 25px", width:"100%", maxWidth:"400px", position:"relative", boxShadow:"0 4px 20px rgba(0,0,0,0.5)" }}>
+        <button onClick={handleClose} style={{ position:"absolute", top:"12px", right:"12px", background:"transparent", border:"none", fontSize:"1.5rem", cursor:"pointer", fontWeight:"bold", color:"#fff" }}>&times;</button>
+        <h2 style={{ textAlign:"center", marginBottom:"25px" }}>Login</h2>
+        <form onSubmit={handleSubmit} style={{ display:"flex", flexDirection:"column" }}>
+          <label htmlFor="email" style={{ marginBottom:"5px" }}>Email:</label>
+          <input type="email" name="email" id="email" placeholder="Enter your email" value={loginData.email} onChange={handleChange} style={{ marginBottom:"15px", padding:"10px", borderRadius:"6px", border:"1px solid #555", backgroundColor:"#111", color:"#fff" }} required />
 
-        <h2 style={{ textAlign: 'center', marginBottom: '25px' }}>Login</h2>
+          <label htmlFor="password" style={{ marginBottom:"5px" }}>Password:</label>
+          <input type="password" name="password" id="password" placeholder="Enter your password" value={loginData.password} onChange={handleChange} style={{ marginBottom:"20px", padding:"10px", borderRadius:"6px", border:"1px solid #555", backgroundColor:"#111", color:"#fff" }} required />
 
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
-          <label htmlFor="email" style={{ marginBottom: '5px' }}>Email:</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Enter your email"
-            value={loginData.email}
-            onChange={handleChange}
-            style={{ marginBottom: '15px', padding: '10px', borderRadius: '6px', border: '1px solid #ccc' }}
-            required
-          />
-
-          <label htmlFor="password" style={{ marginBottom: '5px' }}>Password:</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Enter your password"
-            value={loginData.password}
-            onChange={handleChange}
-            style={{ marginBottom: '20px', padding: '10px', borderRadius: '6px', border: '1px solid #ccc' }}
-            required
-          />
-
-          <button
-            type="submit"
-            style={{
-              backgroundColor: 'black',
-              color: 'white',
-              padding: '12px',
-              border: 'none',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              fontWeight: 'bold',
-              transition: 'background 0.3s',
-            }}
-            onMouseOver={(e) => (e.target.style.backgroundColor = '#333')}
-            onMouseOut={(e) => (e.target.style.backgroundColor = 'black')}
-          >
-            Login
-          </button>
+          <button type="submit" style={{ backgroundColor:"#fff", color:"#000", padding:"12px", border:"none", borderRadius:"8px", cursor:"pointer", fontWeight:"bold", transition:"all 0.3s" }} onMouseOver={(e)=>e.target.style.backgroundColor="#ddd"} onMouseOut={(e)=>e.target.style.backgroundColor="#fff"}>Login</button>
         </form>
 
-        <p style={{ marginTop: '15px', textAlign: 'center' }}>
-          Don’t have an account?{' '}
-          <Link to="/register" style={{ textDecoration: 'none', color: '#007bff' }}>
-            Click here
-          </Link>
+        <p style={{ marginTop:"15px", textAlign:"center" }}>
+          Don’t have an account? <Link to="/register" style={{ textDecoration:"none", color:"#4dabf7" }}>Click here</Link>
         </p>
       </div>
     </div>

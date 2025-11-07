@@ -1,25 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import HotelCard from "./HotelCard/HotelCard";
 import Title from "./Title";
-import { useContext } from "react";
 import { HotelsContext } from "../context/HotelsContext";
 import { Button } from "react-bootstrap";
+import "./FeaturedDestination.css";
 
 function FeaturedDestination() {
-  const sectionPadding = { paddingTop: "5rem", paddingBottom: "5rem" };
   const hotels = useContext(HotelsContext);
   const navigate = useNavigate();
 
   return (
-    <div className="bg-light" style={sectionPadding}>
-      <div className="container">
+    <section className="featured-section py-5">
+      <div className="container text-center">
         <Title
           title="Featured Destination"
           subTitle="Discover our handpicked selection of exceptional properties around the world, offering unparalleled luxury and unforgettable experiences."
         />
 
-        <div className="row justify-content-center g-4">
+        <div className="row justify-content-center g-4 mt-4">
           {hotels.slice(0, 4).map((room, index) => (
             <div
               key={room.id}
@@ -31,17 +30,16 @@ function FeaturedDestination() {
         </div>
 
         <Button
-          variant="light"
           onClick={() => {
             navigate("/rooms");
             window.scrollTo(0, 0);
           }}
-          className="my-4 mx-auto d-block px-4 py-2 text-sm fw-medium border rounded bg-white hover-bg-light transition-all cursor-pointer"
+          className="view-all-btn mt-5"
         >
           View All Rooms
         </Button>
       </div>
-    </div>
+    </section>
   );
 }
 

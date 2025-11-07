@@ -46,3 +46,41 @@
     overflow: visible;
   }
 }
+
+/* Dark mode for filter panel */
+.filter-section-dark {
+  background-color: #1a1a1a; /* dark background */
+  border: 1px solid #333;
+  color: #f5f5f5;
+}
+
+/* Header dark text */
+.filter-section-dark .border-bottom {
+  background-color: #1a1a1a;
+  border-color: #333;
+}
+
+/* Labels and small text */
+.filter-section-dark .form-check-label {
+  color: #f5f5f5 !important;
+}
+
+/* Scrollbar for dark mode */
+.filter-section-dark::-webkit-scrollbar-thumb {
+  background: #555;
+}
+.filter-section-dark::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+/* Dropdown dark mode */
+.filter-section-dark select.form-select {
+  background-color: #2a2a2a;
+  color: #f5f5f5;
+  border: 1px solid #555;
+}
+
+.filter-section-dark select.form-select option {
+  background-color: #2a2a2a;
+  color: #f5f5f5;
+}

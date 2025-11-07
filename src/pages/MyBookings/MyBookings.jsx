@@ -6,26 +6,59 @@ import { useNavigate } from 'react-router-dom';
 
 function MyBookings() {
   const [bookings, setBookings] = useState([]);
+  const [modalMessage, setModalMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [cancelBookingId, setCancelBookingId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Get logged-in user from localStorage
     const authUser = JSON.parse(localStorage.getItem('authUser'));
     if (!authUser) {
-      navigate('/login'); // redirect if not logged in
+      navigate('/login');
       return;
     }
 
-    // Get all bookings
     const storedBookings = JSON.parse(localStorage.getItem('bookings')) || [];
-
-    // Filter only bookings of the logged-in user
     const userBookings = storedBookings.filter(
       (booking) => booking.email === authUser.email
     );
 
     setBookings(userBookings);
   }, [navigate]);
+
+  const handleCancelClick = (bookingId, checkInDate) => {
+    const today = new Date();
+    const checkIn = new Date(checkInDate);
+    const diffTime = checkIn - today;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays >= 5) {
+      // Show confirmation modal
+      setCancelBookingId(bookingId);
+      setModalMessage("Are you sure you want to cancel this booking?");
+      setShowModal(true);
+    } else {
+      // Cannot cancel
+      setModalMessage(
+        "Can't cancel your booking. Bookings can be canceled only 5 days before check-in."
+      );
+      setCancelBookingId(null);
+      setShowModal(true);
+    }
+  };
+
+  const confirmCancel = () => {
+    if (cancelBookingId) {
+      const updatedBookings = bookings.filter((b) => b.id !== cancelBookingId);
+      setBookings(updatedBookings);
+
+      const allBookings = JSON.parse(localStorage.getItem('bookings')) || [];
+      const newAllBookings = allBookings.filter((b) => b.id !== cancelBookingId);
+      localStorage.setItem('bookings', JSON.stringify(newAllBookings));
+    }
+    setShowModal(false);
+    setCancelBookingId(null);
+  };
 
   return (
     <div className="mybookings-page">
@@ -56,19 +89,17 @@ function MyBookings() {
           </div>
         ) : (
           <div className="booking-table mt-5">
-            {/* Table Header */}
             <div className="table-header">
               <div>Hotels</div>
               <div>Guests</div>
               <div>Check-In</div>
               <div>Check-Out</div>
               <div>Total Price</div>
+              <div>Action</div>
             </div>
 
-            {/* Table Rows */}
             {bookings.map((booking) => (
               <div key={booking.id} className="table-row">
-                {/* Hotel Column */}
                 <div className="hotel-info">
                   <img
                     src={booking.hotel?.images ? booking.hotel.images[0] : ''}
@@ -93,23 +124,45 @@ function MyBookings() {
                   </div>
                 </div>
 
-                {/* Guests */}
-                <div className="guests-col">{booking.guests}</div>
-
-                {/* Check-In */}
-                <div className="date-col">
-                  {new Date(booking.checkInDate).toDateString()}
-                </div>
-
-                {/* Check-Out */}
-                <div className="date-col">
-                  {new Date(booking.checkOutDate).toDateString()}
-                </div>
-
-                {/* Total Price */}
+                <div className="guests-col text-center me-5">{booking.guests}</div>
+                <div className="date-col">{new Date(booking.checkInDate).toDateString()}</div>
+                <div className="date-col">{new Date(booking.checkOutDate).toDateString()}</div>
                 <div className="price-col">₹{booking.totalPrice || 0}</div>
+
+                <div className="action-col">
+                  <button
+                    className="edit-btn"
+                    onClick={() =>
+                      navigate(`/book-now/${booking.hotel.id}`, { state: { booking } })
+                    }
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="cancel-btn"
+                    onClick={() => handleCancelClick(booking.id, booking.checkInDate)}
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
             ))}
+          </div>
+        )}
+
+        {showModal && (
+          <div className="modal-overlay" onClick={() => setShowModal(false)}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+              <p>{modalMessage}</p>
+              {cancelBookingId ? (
+                <div className="modal-actions">
+                  <button className="confirm-btn" onClick={confirmCancel}>Yes</button>
+                  <button className="close-modal" onClick={() => setShowModal(false)}>No</button>
+                </div>
+              ) : (
+                <button className="close-modal" onClick={() => setShowModal(false)}>Close</button>
+              )}
+            </div>
           </div>
         )}
       </div>

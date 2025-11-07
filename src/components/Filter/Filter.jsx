@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { HotelsContext } from "../../context/HotelsContext";
+import { ThemeContext } from "../../context/ThemeContext"; // ✅ import theme context
 import "./Filter.css";
 
 function Filter({ filters, setFilters, clearFilters }) {
   const hotels = useContext(HotelsContext);
+  const { theme } = useContext(ThemeContext); // ✅ get current theme
 
   // Dynamic room types
   const roomTypes = hotels ? [...new Set(hotels.map((hotel) => hotel.roomType))] : [];
@@ -14,13 +16,21 @@ function Filter({ filters, setFilters, clearFilters }) {
   // Static price ranges
   const priceRanges = ["0-5000", "5000-6000", "6000-8000", "8000-9000"];
 
+  // Determine text classes
+  const textClass = theme === "dark" ? "text-light" : "text-dark";
+  const labelClass = theme === "dark" ? "text-light" : "text-muted";
+
   return (
-    <div className="filter-section bg-white rounded-3 shadow-sm">
+    <div
+      className={`filter-section shadow-sm rounded-3 ${
+        theme === "dark" ? "filter-section-dark" : "bg-white"
+      }`}
+    >
       {/* Header */}
-      <div className="d-flex align-items-center justify-content-between px-4 py-3 border-bottom">
-        <h6 className="mb-0 fw-semibold text-dark">FILTERS</h6>
+      <div className={`d-flex align-items-center justify-content-between px-4 py-3 border-bottom ${theme === "dark" ? "border-secondary" : ""}`}>
+        <h6 className={`mb-0 fw-semibold ${textClass}`}>FILTERS</h6>
         <span
-          className="fw-semibold text-dark"
+          className={`fw-semibold ${textClass}`}
           style={{ fontSize: "0.85rem", cursor: "pointer" }}
           onClick={clearFilters}
         >
@@ -30,7 +40,7 @@ function Filter({ filters, setFilters, clearFilters }) {
 
       <div className="px-4 py-4">
         {/* Room Type */}
-        <p className="fw-semibold text-dark">Room Type</p>
+        <p className={`fw-semibold ${textClass}`}>Room Type</p>
         {roomTypes.map((type) => (
           <div key={type} className="form-check small">
             <input
@@ -40,12 +50,12 @@ function Filter({ filters, setFilters, clearFilters }) {
               checked={filters.type === type}
               onChange={() => setFilters({ ...filters, type })}
             />
-            <label className="form-check-label text-muted ms-2">{type}</label>
+            <label className={`form-check-label ms-2 ${labelClass}`}>{type}</label>
           </div>
         ))}
 
         {/* Price Range */}
-        <p className="fw-semibold text-dark mt-4">Price Range</p>
+        <p className={`fw-semibold mt-4 ${textClass}`}>Price Range</p>
         {priceRanges.map((range) => (
           <div key={range} className="form-check small">
             <input
@@ -55,16 +65,16 @@ function Filter({ filters, setFilters, clearFilters }) {
               checked={filters.price === range}
               onChange={() => setFilters({ ...filters, price: range })}
             />
-            <label className="form-check-label text-muted ms-2">
+            <label className={`form-check-label ms-2 ${labelClass}`}>
               ₹{range.replace("-", " to ₹")}
             </label>
           </div>
         ))}
 
         {/* Place Dropdown */}
-        <p className="fw-semibold text-dark mt-4">Place</p>
+        <p className={`fw-semibold mt-4 ${textClass}`}>Place</p>
         <select
-          className="form-select form-select-sm mb-3"
+          className={`form-select form-select-sm mb-3 ${theme === "dark" ? "text-light bg-dark border-secondary" : ""}`}
           value={filters.place || ""}
           onChange={(e) => setFilters({ ...filters, place: e.target.value })}
         >
@@ -77,7 +87,7 @@ function Filter({ filters, setFilters, clearFilters }) {
         </select>
 
         {/* Sort By */}
-        <p className="fw-semibold text-dark mt-4">Sort By</p>
+        <p className={`fw-semibold mt-4 ${textClass}`}>Sort By</p>
         {[
           { label: "Price Low to High", value: "low" },
           { label: "Price High to Low", value: "high" },
@@ -90,7 +100,7 @@ function Filter({ filters, setFilters, clearFilters }) {
               checked={filters.sort === sort.value}
               onChange={() => setFilters({ ...filters, sort: sort.value })}
             />
-            <label className="form-check-label text-muted ms-2">{sort.label}</label>
+            <label className={`form-check-label ms-2 ${labelClass}`}>{sort.label}</label>
           </div>
         ))}
       </div>

@@ -1,20 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+/* ---------- Page Wrapper ---------- */
 .mybookings-page {
   padding-top: 7rem;
   padding-bottom: 7rem;
   display: flex;
   justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .mybookings-wrapper {
   width: 100%;
   max-width: 75rem;
-  padding-left: 5rem; /* 👈 Same left padding for title + table */
+  padding-left: 2rem;
   padding-right: 2rem;
   font-family: 'Inter', sans-serif;
 }
 
+/* ---------- Table ---------- */
 .booking-table {
   width: 100%;
   border-collapse: collapse;
@@ -23,7 +26,7 @@
 
 .table-header {
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr 1fr 1fr 1fr 1fr; /* 6 columns */
   font-weight: 600;
   border-bottom: 2px solid #d1d5db;
   padding-bottom: 0.8rem;
@@ -35,37 +38,40 @@
 
 .table-row {
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr 1fr 1fr 1fr 1fr; /* 6 columns */
   align-items: center;
   border-bottom: 1px solid #e5e7eb;
-  padding: 1.8rem 0;
+  padding: 1.5rem 0;
+  gap: 0.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* ---------- Hotel Info ---------- */
 .hotel-info {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 1rem;
 }
 
 .hotel-img {
-  width: 140px; /* 👈 Increased image size */
-  height: 95px;
+  width: 120px;
+  height: 80px;
   object-fit: cover;
   border-radius: 12px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .hotel-name {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #1f2937;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
 }
 
 .room-type {
   font-weight: 400;
   color: #6b7280;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .location-icon {
@@ -77,14 +83,138 @@
 .guests-col,
 .date-col,
 .price-col {
-  text-align: left;
-  padding-left: 0.5rem;
   font-size: 15px;
   color: #374151;
+  padding-left: 0.5rem;
+}
+
+.guests-col {
+  text-align: center;
 }
 
 .price-col {
   font-weight: 600;
+}
+
+.action-col {
+  display: flex;
+  gap: 8px;
+}
+
+/* ---------- Buttons ---------- */
+.edit-btn,
+.close-modal {
+  padding: 6px 14px;
+  background-color: #2563eb; /* Blue */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.edit-btn:hover,
+.close-modal:hover {
+  background-color: #1d4ed8;
+}
+
+.cancel-btn,
+.confirm-btn {
+  padding: 6px 14px;
+  background-color: #ef4444; /* Red */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.cancel-btn:hover,
+.confirm-btn:hover {
+  background-color: #b91c1c;
+}
+
+/* ---------- Modal ---------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 25px 35px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.modal-content p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #111827;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+/* ---------- Dark Theme ---------- */
+[data-theme="dark"] .mybookings-page {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+[data-theme="dark"] .table-row {
+  background-color: #1e1e1e;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+[data-theme="dark"] .hotel-name {
+  color: #90cdf4;
+}
+
+[data-theme="dark"] .room-type {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .guests-col,
+[data-theme="dark"] .date-col,
+[data-theme="dark"] .price-col {
+  color: #e5e7eb;
+}
+
+[data-theme="dark"] .action-col button {
+  color: #fff;
+}
+
+[data-theme="dark"] .modal-content {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+  border: 1px solid #2a2a2a;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .table-row,
+  .table-header {
+    grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr 1fr;
+  }
 }
 
 @media (max-width: 768px) {
@@ -96,16 +226,99 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1rem 0;
   }
 
   .hotel-info {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .guests-col,
+  .date-col,
+  .price-col,
+  .action-col {
+    width: 100%;
+    text-align: center;
+    margin-top: 4px;
+  }
+
+  .action-col {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .hotel-img {
+    width: 100px;
+    height: 70px;
+  }
+
+  .hotel-name {
+    font-size: 14px;
+  }
+
+  .room-type {
+    font-size: 13px;
   }
 
   .guests-col,
   .date-col,
   .price-col {
-    padding-left: 0;
+    font-size: 13px;
   }
+
+  .edit-btn,
+  .cancel-btn,
+  .confirm-btn,
+  .close-modal {
+    padding: 5px 12px;
+    font-size: 0.85rem;
+  }
+
+  .modal-content {
+    padding: 20px 25px;
+  }
+}
+
+/* ---------- Dark Theme ---------- */
+[data-theme="dark"] .mybookings-page {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+[data-theme="dark"] .table-header {
+  color: #f5f5f5; /* Make table headings visible */
+  border-bottom: 2px solid #2a2a2a;
+}
+
+[data-theme="dark"] .table-row {
+  background-color: #1e1e1e;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+[data-theme="dark"] .hotel-name {
+  color: #90cdf4;
+}
+
+[data-theme="dark"] .room-type {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .guests-col,
+[data-theme="dark"] .date-col,
+[data-theme="dark"] .price-col {
+  color: #e5e7eb;
+}
+
+[data-theme="dark"] .action-col button {
+  color: #fff;
+}
+
+[data-theme="dark"] .modal-content {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+  border: 1px solid #2a2a2a;
 }

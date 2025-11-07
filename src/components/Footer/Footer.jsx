@@ -10,9 +10,8 @@ function Footer() {
 
   return (
     <footer
-      className={`footer ${
-        theme === "dark" ? "footer-dark" : "footer-light"
-      } py-5 mt-5`}
+      className={`footer ${theme === "dark" ? "footer-dark" : "footer-light"
+        } py-5 mt-5`}
     >
       <Container>
         <Row className="gy-4 gx-5 align-items-start">
@@ -85,12 +84,13 @@ function Footer() {
           <p className="mb-0">
             © {new Date().getFullYear()} QuickStay. All rights reserved.
           </p>
-          <div className="d-flex gap-3">
-            <a href="#" className="text-decoration-none">Privacy</a>
-            <a href="#" className="text-decoration-none">Terms</a>
-            <a href="#" className="text-decoration-none">Sitemap</a>
+          <div className="bottom-links d-flex gap-3">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Sitemap</a>
           </div>
         </div>
+
       </Container>
     </footer>
   );

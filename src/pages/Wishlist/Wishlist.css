@@ -1,16 +1,262 @@
-.wishlist-container {
-  padding-top: 100px; /* To avoid overlapping with navbar */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.wishlist-page {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+  display: flex;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
-table {
+.wishlist-wrapper {
+  width: 100%;
+  max-width: 75rem;
+  padding: 0 2rem;
+}
+
+.wishlist-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Empty Wishlist */
+.empty-text {
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.browse-link {
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 10px;
+  color: var(--color-primary);
+}
+
+/* Table */
+.wishlist-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--text-color);
+}
+
+/* Table Header */
+.wishlist-table .table-header {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1fr 1.5fr; /* Hotels closer to Rating */
+  font-weight: 600;
+  border-bottom: 2px solid var(--card-border);
+  padding-bottom: 0.8rem;
+  align-items: center;
+  gap: 1rem;
+}
+
+.wishlist-table .table-header div {
+  text-align: left;
+}
+
+/* Table Rows */
+.wishlist-table .table-row {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1fr 1.5fr; /* match header */
+  align-items: center;
+  border-bottom: 1px solid var(--card-border);
+  padding: 1rem 0;
+  gap: 1rem;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+/* Hotels Column */
+.wishlist-table .hotel-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.wishlist-table .hotel-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical center of name + address */
+}
+
+.wishlist-table .hotel-img {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
   border-radius: 12px;
-  overflow: hidden;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
-button {
-  transition: 0.3s ease;
+.wishlist-table .hotel-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 4px;
 }
 
-button:hover {
+.wishlist-table .hotel-address {
+  font-size: 14px;
+  font-weight: 400;
+  color: #6b7280; /* optional: could also make lighter in dark mode */
+}
+
+/* Rating, Price, Actions Columns */
+.wishlist-table .rating-col,
+.wishlist-table .price-col,
+.wishlist-table .action-col {
+  display: flex;
+  justify-content: flex-start; /* left-aligned on desktop */
+  align-items: center;
+  font-size: 15px;
+  color: var(--text-color);
+}
+
+.wishlist-table .price-col {
+  font-weight: 600;
+}
+
+/* Actions */
+.wishlist-table .action-col {
+  gap: 8px;
+}
+
+.wishlist-table .remove-btn,
+.wishlist-table .book-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.wishlist-table .remove-btn {
+  background-color: #ef4444;
+  color: #fff;
+}
+
+.wishlist-table .remove-btn:hover {
+  background-color: #b91c1c;
   transform: scale(1.05);
+}
+
+.wishlist-table .book-btn {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.wishlist-table .book-btn:hover {
+  background-color: #1d4ed8;
+  transform: scale(1.05);
+}
+
+/* Medium screens (slightly smaller) */
+@media (max-width: 1024px) {
+  .wishlist-table .table-header,
+  .wishlist-table .table-row {
+    grid-template-columns: 2.2fr 0.8fr 1fr 1.5fr;
+  }
+}
+
+/* Small screens (<768px) - stacked rows with mobile-friendly labels */
+@media (max-width: 768px) {
+  .wishlist-table .table-header {
+    display: none;
+  }
+
+  .wishlist-table .table-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .wishlist-table .table-row > div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.2rem 0;
+  }
+
+  .wishlist-table .table-row > div::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-color);
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+
+  .wishlist-table .hotel-info {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .wishlist-table .hotel-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .wishlist-table .hotel-img {
+    width: 80px;
+    height: 60px;
+  }
+
+  .wishlist-table .rating-col,
+  .wishlist-table .price-col,
+  .wishlist-table .action-col {
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .wishlist-table .action-col {
+    flex-wrap: wrap;
+  }
+}
+
+/* Very small screens (<480px) */
+@media (max-width: 480px) {
+  .wishlist-wrapper {
+    padding: 0 1rem;
+  }
+
+  .wishlist-table .table-row {
+    gap: 0.3rem;
+  }
+
+  .wishlist-table .hotel-name {
+    font-size: 14px;
+  }
+
+  .wishlist-table .hotel-address {
+    font-size: 12px;
+  }
+
+  .wishlist-table .rating-col,
+  .wishlist-table .price-col,
+  .wishlist-table .action-col {
+    font-size: 14px;
+  }
+}
+
+/* Dark Mode Specific Adjustments */
+[data-theme="dark"] .wishlist-table .table-row {
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+}
+
+[data-theme="dark"] .wishlist-table .hotel-address {
+  color: #9ca3af; /* lighter gray for dark mode */
 }

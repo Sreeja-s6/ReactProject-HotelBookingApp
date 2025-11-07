@@ -3,7 +3,20 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 2rem;
-  padding: 6rem 3rem 3rem; /* top padding for navbar */
+  padding: 6rem 3rem 3rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Theme */
+.dark-theme {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+.rooms-container {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Title */
@@ -11,21 +24,14 @@
   margin-bottom: 2rem;
 }
 
-/* Left side container */
-.rooms-container {
-  flex: 3;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Two-column grid for cards */
+/* Grid */
 .rooms-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
 }
 
-/* Room card */
+/* Room Card */
 .room-card {
   background: #fff;
   border-radius: 16px;
@@ -39,7 +45,12 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
-/* Image */
+/* Dark mode card */
+.room-card-dark {
+  background: #1e1e1e;
+  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.05);
+}
+
 .room-image-wrapper {
   position: relative;
 }
@@ -57,9 +68,18 @@
   cursor: pointer;
 }
 
+.room-details p,
+.room-details h5 {
+  transition: color 0.3s ease;
+}
+
 /* Price */
 .price-text {
   color: #2563eb;
+}
+
+.text-primary-light {
+  color: #60a5fa !important;
 }
 
 /* No rooms text */
@@ -80,5 +100,11 @@
 
   .rooms-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .room-image {
+    height: 180px;
   }
 }

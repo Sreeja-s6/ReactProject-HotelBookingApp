@@ -28,7 +28,7 @@ const Contact = () => {
   // Regex patterns
   const namePattern = /^[A-Za-z ]*$/;
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const phonePattern = /^[0-9]{0,10}$/; // max 10 digits while typing
+  const phonePattern = /^[0-9]{0,10}$/; 
   const messagePattern = /^[A-Za-z ]*$/;
 
   const handleChange = (e) => {

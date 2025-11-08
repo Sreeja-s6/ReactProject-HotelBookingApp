@@ -5,7 +5,7 @@ export const ThemeContext = createContext();
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
-  // ✅ Apply data-theme to the <html> tag globally
+  
   useEffect(() => {
     const root = document.documentElement;
     root.setAttribute("data-theme", theme);

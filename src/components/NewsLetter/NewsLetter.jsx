@@ -18,9 +18,9 @@ function NewsLetter() {
       return;
     }
 
-    setError(""); // clear error
-    setShowModal(true); // show thank you modal
-    setEmail(""); // clear input
+    setError(""); 
+    setShowModal(true); 
+    setEmail(""); 
   };
 
   return (

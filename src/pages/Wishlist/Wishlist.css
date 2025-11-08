@@ -50,7 +50,7 @@
 /* Table Header */
 .wishlist-table .table-header {
   display: grid;
-  grid-template-columns: 2.5fr 1fr 1fr 1.5fr; /* Hotels closer to Rating */
+  grid-template-columns: 2.5fr 1fr 1fr 1.5fr; 
   font-weight: 600;
   border-bottom: 2px solid var(--card-border);
   padding-bottom: 0.8rem;
@@ -65,7 +65,7 @@
 /* Table Rows */
 .wishlist-table .table-row {
   display: grid;
-  grid-template-columns: 2.5fr 1fr 1fr 1.5fr; /* match header */
+  grid-template-columns: 2.5fr 1fr 1fr 1.5fr; 
   align-items: center;
   border-bottom: 1px solid var(--card-border);
   padding: 1rem 0;
@@ -75,7 +75,7 @@
   margin-bottom: 0.5rem;
 }
 
-/* Hotels Column */
+
 .wishlist-table .hotel-info {
   display: flex;
   align-items: center;
@@ -85,7 +85,7 @@
 .wishlist-table .hotel-text {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* vertical center of name + address */
+  justify-content: center; 
 }
 
 .wishlist-table .hotel-img {
@@ -106,7 +106,7 @@
 .wishlist-table .hotel-address {
   font-size: 14px;
   font-weight: 400;
-  color: #6b7280; /* optional: could also make lighter in dark mode */
+  color: #6b7280;
 }
 
 /* Rating, Price, Actions Columns */
@@ -114,7 +114,7 @@
 .wishlist-table .price-col,
 .wishlist-table .action-col {
   display: flex;
-  justify-content: flex-start; /* left-aligned on desktop */
+  justify-content: flex-start; 
   align-items: center;
   font-size: 15px;
   color: var(--text-color);
@@ -124,7 +124,6 @@
   font-weight: 600;
 }
 
-/* Actions */
 .wishlist-table .action-col {
   gap: 8px;
 }
@@ -159,7 +158,7 @@
   transform: scale(1.05);
 }
 
-/* Medium screens (slightly smaller) */
+/* Medium screens */
 @media (max-width: 1024px) {
   .wishlist-table .table-header,
   .wishlist-table .table-row {
@@ -167,7 +166,7 @@
   }
 }
 
-/* Small screens (<768px) - stacked rows with mobile-friendly labels */
+/* Small screens (<768px) */
 @media (max-width: 768px) {
   .wishlist-table .table-header {
     display: none;
@@ -251,12 +250,12 @@
   }
 }
 
-/* Dark Mode Specific Adjustments */
+/* Dark Mode */
 [data-theme="dark"] .wishlist-table .table-row {
   background-color: var(--card-bg);
   border-color: var(--card-border);
 }
 
 [data-theme="dark"] .wishlist-table .hotel-address {
-  color: #9ca3af; /* lighter gray for dark mode */
+  color: #9ca3af; 
 }

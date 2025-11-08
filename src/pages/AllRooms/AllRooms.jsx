@@ -6,14 +6,14 @@ import Filter from "../../components/Filter/Filter";
 import Title from "../../components/Title";
 import { FaStar, FaRegHeart, FaHeart, FaMapMarkerAlt } from "react-icons/fa";
 import './AllRooms.css';
-import { ThemeContext } from "../../context/ThemeContext"; // ✅ Theme context
+import { ThemeContext } from "../../context/ThemeContext"; 
 
 function AllRooms() {
   const rooms = useContext(HotelsContext);
   const { wishlist, addToWishlist, removeFromWishlist, isFavorite } = useContext(WishlistContext);
   const navigate = useNavigate();
   const location = useLocation();
-  const { theme } = useContext(ThemeContext); // ✅ Get theme
+  const { theme } = useContext(ThemeContext); 
 
   const query = new URLSearchParams(location.search);
   const initialDestination = query.get("destination") || "";

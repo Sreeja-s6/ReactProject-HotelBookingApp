@@ -5,6 +5,6 @@
 }
 
 .exclusiveOffers-card img {
-  height: 300px; /* fix the image height */
-  object-fit: cover; /* crop/fit image to cover the area */
+  height: 300px; 
+  object-fit: cover; 
 }

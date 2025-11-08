@@ -45,7 +45,7 @@ const Navbar1 = () => {
     if (authUser) localStorage.removeItem(`wishlist_${authUser.email}`);
     clearWishlist();
     localStorage.removeItem("authUser");
-    navigate("/login", { replace: true });
+    navigate("/", { replace: true });
   };
 
   return (
@@ -75,10 +75,10 @@ const Navbar1 = () => {
       width: "auto",
       filter:
         theme === "dark"
-          ? "invert(0)" // dark theme → white (original color)
+          ? "invert(0)" 
           : isTransparent
-            ? "invert(0)" // light theme top → white
-            : "invert(1) brightness(0)", // light theme scrolled → black
+            ? "invert(0)" 
+            : "invert(1) brightness(0)", 
       transition: "filter 0.3s ease",
     }}
   />

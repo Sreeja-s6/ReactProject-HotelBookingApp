@@ -1,4 +1,4 @@
-/* 🌞 Light Mode */
+/* Light Mode */
 .newsletter-section {
   background-color: #ffffff;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -57,11 +57,11 @@
   font-size: 13px;
 }
 
-/* 🌙 Dark Mode */
+/*  Dark Mode */
 [data-theme="dark"] .newsletter-section {
-  background-color: #111; /* matches footer background */
-  margin-bottom: 0; /* removes spacing if any */
-  padding-bottom: 0; /* keeps it flush */
+  background-color: #111; 
+  margin-bottom: 0; 
+  padding-bottom: 0; 
 }
 
 [data-theme="dark"] .newsletter-box {
@@ -70,7 +70,7 @@
 
 
 [data-theme="dark"] .newsletter-box {
-  background-color: #181818; /* neutral dark inner box */
+  background-color: #181818; 
   color: #f5f5f5;
 }
 

@@ -64,7 +64,7 @@
   max-width: 925px;
   display: flex;
   flex-wrap: wrap;
-  align-items: end; /* ✅ Align fields and button properly */
+  align-items: end; 
   gap: 1rem;
 }
 
@@ -85,7 +85,7 @@
   padding: 8px 12px;
 }
 
-/* ✅ Search Button (no blue color) */
+/* Search Button */
 .search-btn {
   background-color: var(--btn-bg);
   color: var(--btn-text);
@@ -112,7 +112,7 @@
   color: var(--icon-color);
 }
 
-/* 🌞 Light Theme */
+/* Light Theme */
 :root {
   --hero-text: #fff;
   --hero-overlay: rgba(0, 0, 0, 0.3);
@@ -127,7 +127,7 @@
   --icon-color: #333;
 }
 
-/* 🌙 Dark Theme */
+/* Dark Theme */
 [data-theme="dark"] {
   --hero-overlay: rgba(0, 0, 0, 0.6);
   --hero-text: #f5f5f5;
@@ -142,7 +142,7 @@
   --icon-color: #f5f5f5;
 }
 
-/* 🌐 Responsive Form Adjustments */
+/*  Responsive Form */
 @media (max-width: 768px) {
   .hero-section {
     height: auto;

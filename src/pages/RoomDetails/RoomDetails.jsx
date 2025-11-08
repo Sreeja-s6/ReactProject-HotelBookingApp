@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // ✅ Import useNavigate
+import { useParams, useNavigate } from "react-router-dom"; 
 import { Carousel, Button, Spinner, Container, Row, Col, Card } from "react-bootstrap";
 import "./RoomDetails.css";
 
 function RoomDetails() {
   const { id } = useParams();
-  const navigate = useNavigate(); // ✅ Initialize navigate
+  const navigate = useNavigate(); 
   const [hotel, setHotel] = useState(null);
   const [loading, setLoading] = useState(true);
 

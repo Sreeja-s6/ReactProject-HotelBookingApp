@@ -4,11 +4,11 @@ import Title from "./Title";
 import StarRating from "./StarRating";
 import { Row, Col, Card } from "react-bootstrap";
 import { ThemeContext } from "../context/ThemeContext";
-import "./Testimonial.css"; // ✅ make sure CSS is imported
+import "./Testimonial.css"; 
 
 function Testimonial() {
   const [testimonials, setTestimonials] = useState([]);
-  const { theme } = useContext(ThemeContext); // ✅ access theme context
+  const { theme } = useContext(ThemeContext); 
 
   useEffect(() => {
     axios

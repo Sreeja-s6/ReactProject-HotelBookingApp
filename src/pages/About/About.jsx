@@ -11,7 +11,6 @@ const About = () => {
       .get("http://localhost:5001/exclusiveOffers")
       .then((res) => {
         if (res.data.length > 0) {
-          // Get the first offer's image
           setOfferImage(res.data[0].image);
         }
       })

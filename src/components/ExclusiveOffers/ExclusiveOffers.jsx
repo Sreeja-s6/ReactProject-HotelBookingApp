@@ -33,7 +33,6 @@ function ExclusiveOffers() {
                 {/* Hotel Image */}
                 <Card.Img src={item.image} alt={item.title} />
 
-                {/* Overlay gradient */}
                 <div
                   className="position-absolute top-0 start-0 w-100 h-100"
                   style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.1))" }}

@@ -24,7 +24,7 @@ function Title({ title, subTitle, align, font }) {
         style={{
           fontSize: "0.9rem",
           maxWidth: "600px",
-          color: theme === "dark" ? "#ccc" : "#6c757d", // ✅ visible subtitle
+          color: theme === "dark" ? "#ccc" : "#6c757d", 
         }}
       >
         {subTitle}

@@ -67,18 +67,27 @@ function BookNow() {
   // Calculate total price
   useEffect(() => {
     if (!hotel) return setTotalPrice(0);
-    const { checkIn, checkOut, guests } = formData;
+
+    const { checkIn, checkOut } = formData;
+
     if (checkIn && checkOut) {
-      const checkInDate = new Date(checkIn);
-      const checkOutDate = new Date(checkOut);
+      // Parse dates as UTC to avoid timezone issues
+      const checkInDate = new Date(checkIn + "T00:00:00Z");
+      const checkOutDate = new Date(checkOut + "T00:00:00Z");
+
       if (checkOutDate > checkInDate) {
         const msPerDay = 1000 * 60 * 60 * 24;
-        const diffDays = Math.round((checkOutDate - checkInDate) / msPerDay);
-        const validGuests = Number.isInteger(+guests) && +guests >= 1 ? +guests : 1;
-        setTotalPrice(diffDays * hotel.pricePerNight * validGuests);
-      } else setTotalPrice(0);
-    } else setTotalPrice(0);
-  }, [formData.checkIn, formData.checkOut, formData.guests, hotel]);
+        const diffDays = Math.ceil((checkOutDate - checkInDate) / msPerDay);
+
+        setTotalPrice(diffDays * hotel.pricePerNight);
+      } else {
+        setTotalPrice(0); // Invalid check-out
+      }
+    } else {
+      setTotalPrice(0); // Missing dates
+    }
+  }, [formData.checkIn, formData.checkOut, hotel]);
+
 
   // Validation
   const validateField = (name, value) => {
@@ -87,20 +96,20 @@ function BookNow() {
         return value.trim() === ""
           ? "Name is required"
           : /^[A-Za-z ]+$/.test(value)
-          ? ""
-          : "Name can contain only letters and spaces";
+            ? ""
+            : "Name can contain only letters and spaces";
       case "email":
         return value.trim() === ""
           ? "Email is required"
           : /^[\w.-]+@[\w.-]+\.\w{2,4}$/.test(value)
-          ? ""
-          : "Enter a valid email";
+            ? ""
+            : "Enter a valid email";
       case "contact":
         return value.trim() === ""
           ? "Contact is required"
           : /^\d{10}$/.test(value)
-          ? ""
-          : "Enter a valid 10-digit phone number";
+            ? ""
+            : "Enter a valid 10-digit phone number";
       case "guests":
         return Number(value) >= 1 ? "" : "At least 1 guest is required";
       default:

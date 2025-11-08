@@ -15,11 +15,11 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import { HotelsContext } from './context/HotelsContext';
 import ProtectedRoute from './components/ProtectedRoute';
-import { ThemeContext } from './context/ThemeContext'; // ✅ Import ThemeContext
+import { ThemeContext } from './context/ThemeContext'; 
 
 function App() {
   const [hotels, setHotels] = useState([]);
-  const { theme } = useContext(ThemeContext); // ✅ Get current theme from context
+  const { theme } = useContext(ThemeContext); 
 
   useEffect(() => {
     axios

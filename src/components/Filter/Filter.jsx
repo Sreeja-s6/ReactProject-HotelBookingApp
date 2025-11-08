@@ -1,22 +1,21 @@
 import React, { useContext } from "react";
 import { HotelsContext } from "../../context/HotelsContext";
-import { ThemeContext } from "../../context/ThemeContext"; // ✅ import theme context
+import { ThemeContext } from "../../context/ThemeContext"; 
 import "./Filter.css";
 
 function Filter({ filters, setFilters, clearFilters }) {
   const hotels = useContext(HotelsContext);
-  const { theme } = useContext(ThemeContext); // ✅ get current theme
+  const { theme } = useContext(ThemeContext); 
 
-  // Dynamic room types
+  // room types
   const roomTypes = hotels ? [...new Set(hotels.map((hotel) => hotel.roomType))] : [];
 
-  // Dynamic places
+  // places
   const places = hotels ? [...new Set(hotels.map((hotel) => hotel.place))] : [];
 
-  // Static price ranges
+  // price ranges
   const priceRanges = ["0-5000", "5000-6000", "6000-8000", "8000-9000"];
 
-  // Determine text classes
   const textClass = theme === "dark" ? "text-light" : "text-dark";
   const labelClass = theme === "dark" ? "text-light" : "text-muted";
 

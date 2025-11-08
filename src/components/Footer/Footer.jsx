@@ -3,10 +3,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import { FaInstagram, FaTwitter, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import "./Footer.css";
 import { assets } from "../../assets/assets";
-import { ThemeContext } from "../../context/ThemeContext"; // ✅ Theme context import
+import { ThemeContext } from "../../context/ThemeContext"; 
 
 function Footer() {
-  const { theme } = useContext(ThemeContext); // ✅ get theme (light/dark)
+  const { theme } = useContext(ThemeContext); 
 
   return (
     <footer
@@ -15,7 +15,7 @@ function Footer() {
     >
       <Container>
         <Row className="gy-4 gx-5 align-items-start">
-          {/* --- Left Section (Logo + Description + Socials) --- */}
+          {/* --- Left Section --- */}
           <Col md={4}>
             <img
               src={assets.logo}
@@ -73,7 +73,6 @@ function Footer() {
             <p className="footer-desc">
               Subscribe to our newsletter for travel inspiration and special offers.
             </p>
-            {/* (Optional: You can add an email input here later) */}
           </Col>
         </Row>
 
